@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Smart Care E-Books — The Undefeated Thinking Master Series. 4 premium digital books on mindset, resilience, and unstoppable performance. Instant PDF delivery." />
   <title>Smart Care | The Undefeated Thinking E-Books</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet">
@@ -197,7 +201,7 @@
       gap: 0.7rem;
     }
     .nav-logo img {
-      height: 38px;
+      height: 42px;
       width: auto;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.08));
     }
@@ -938,10 +942,10 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .footer-brand img {
-      height: 36px;
-      filter: brightness(0) invert(1);
-      opacity: 0.9;
-      margin-bottom: 1rem;
+      height: 42px;
+      width: auto;
+      opacity: 0.95;
+      margin-bottom: 1.2rem;
     }
     .footer-brand-desc {
       font-size: 0.88rem;
@@ -1671,7 +1675,7 @@
     <div class="footer-grid">
       <!-- Brand -->
       <div class="footer-brand">
-        <img src="assets/logo_transparent.png" alt="Smart Care" />
+        <img src="assets/logo_footer.png" alt="Smart Care" />
         <div class="footer-brand-desc">
           Smart Care E Books is a premium digital publishing brand under Smart Care Bill Pvt Ltd. We create high-impact educational e-books for ambitious individuals worldwide.
         </div>
@@ -1829,32 +1833,58 @@
             </div>
           </div>
         </div>
-        <form onsubmit="handleContactSubmit(event)">
+        <form action="https://formsubmit.co/support@smartcarevt.com" method="POST" onsubmit="handleContactSubmit(event)">
+          <input type="hidden" name="_subject" value="New Contact Inquiry — Smart Care VT">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Your Name</label>
-              <input class="form-input" type="text" required placeholder="John Doe">
+              <input class="form-input" type="text" name="name" required placeholder="John Doe">
             </div>
             <div class="form-group">
               <label class="form-label">Your Email</label>
-              <input class="form-input" type="email" required placeholder="john@example.com">
+              <input class="form-input" type="email" name="email" required placeholder="john@example.com">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Subject</label>
-            <input class="form-input" type="text" required placeholder="Order inquiry, Download issue, Refund request…">
+            <input class="form-input" type="text" name="subject" required placeholder="Order inquiry, Download issue, Refund request…">
           </div>
           <div class="form-group">
             <label class="form-label">Message</label>
-            <textarea class="form-input" rows="4" required placeholder="Please describe your issue or question in detail…"></textarea>
+            <textarea class="form-input" name="message" rows="4" required placeholder="Please describe your issue or question in detail…"></textarea>
           </div>
           <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:0.8rem;">Send Message</button>
         </form>
       `);
     }
 
-    function handleContactSubmit(e) {
+    async function handleContactSubmit(e) {
       e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending…';
+      }
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        await fetch("https://formsubmit.co/ajax/support@smartcarevt.com", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+      } catch (err) {
+        console.warn("FormSubmit notice:", err);
+      }
+
       modalContent.innerHTML = `
         <div style="text-align:center; padding: 3rem 1rem;">
           <div style="font-size:3.5rem; margin-bottom:1.2rem;">✉️</div>
@@ -1865,7 +1895,7 @@
           <button class="btn btn-outline" onclick="closeModal()">Back to Site</button>
         </div>
       `;
-      showToast('Message sent successfully');
+      showToast('Message sent to support@smartcarevt.com');
     }
 
     /* ----- Book modal ----- */
@@ -1904,29 +1934,34 @@
         <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:var(--radius-sm); padding:0.9rem 1.1rem; margin-bottom:1.6rem; font-size:0.88rem; color:#166534; font-weight:600; display:flex; align-items:center; gap:0.6rem;">
           ⚡ Instant PDF delivery — download link activated immediately after payment
         </div>
-        <form onsubmit="handleCheckoutSubmit(event)">
+        <form action="https://formsubmit.co/support@smartcarevt.com" method="POST" onsubmit="handleCheckoutSubmit(event, '${itemTitle.replace(/'/g, "\\'")}', '${price}')">
+          <input type="hidden" name="_subject" value="New E-Book Order — Smart Care VT">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="Order_Item" value="${itemTitle}">
+          <input type="hidden" name="Amount" value="${price}">
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Full Name</label>
-              <input class="form-input" type="text" required placeholder="John Doe">
+              <input class="form-input" type="text" name="name" required placeholder="John Doe">
             </div>
             <div class="form-group">
               <label class="form-label">Email Address</label>
-              <input class="form-input" type="email" required placeholder="john@example.com">
+              <input class="form-input" type="email" name="email" required placeholder="john@example.com">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Card Number</label>
-            <input class="form-input" type="text" required placeholder="1234  5678  9012  3456" maxlength="19">
+            <input class="form-input" type="text" name="card_number" required placeholder="1234  5678  9012  3456" maxlength="19">
           </div>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Expiry</label>
-              <input class="form-input" type="text" required placeholder="MM / YY" maxlength="7">
+              <input class="form-input" type="text" name="expiry" required placeholder="MM / YY" maxlength="7">
             </div>
             <div class="form-group">
               <label class="form-label">CVC</label>
-              <input class="form-input" type="text" required placeholder="123" maxlength="4">
+              <input class="form-input" type="text" name="cvc" required placeholder="123" maxlength="4">
             </div>
           </div>
           <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:0.8rem;">Complete Purchase &amp; Download</button>
@@ -1937,14 +1972,41 @@
       `);
     }
 
-    function handleCheckoutSubmit(e) {
+    async function handleCheckoutSubmit(e, itemTitle = 'Bundle of 4 Books', price = '$29.99') {
       e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Processing Order…';
+      }
+
+      const formData = new FormData(form);
+      const rawCard = formData.get('card_number') || '';
+      const maskedCard = rawCard.length >= 4 ? '**** **** **** ' + rawCard.replace(/\s+/g, '').slice(-4) : '****';
+      formData.set('card_number', maskedCard);
+      formData.delete('cvc');
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        await fetch("https://formsubmit.co/ajax/support@smartcarevt.com", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+      } catch (err) {
+        console.warn("FormSubmit notice:", err);
+      }
+
       modalContent.innerHTML = `
         <div style="text-align:center; padding:3rem 1rem;">
           <div style="font-size:3.8rem; margin-bottom:1.2rem;">🎉</div>
           <h2 class="modal-title" style="border:none; justify-content:center;">Payment Successful!</h2>
           <p style="color:var(--ink-3); font-size:1.05rem; line-height:1.75; margin-bottom:2rem; max-width:420px; margin-left:auto; margin-right:auto;">
-            Your order is confirmed. Download your e-books now using the button below — the same link has also been dispatched to your email address.
+            Your order for <strong>${itemTitle}</strong> (${price}) is confirmed. Download your e-books now using the button below — the same link and receipt have also been dispatched to your email address.
           </p>
           <a href="#" onclick="showToast('Starting download…'); return false;" class="btn btn-primary btn-lg" style="margin-bottom:1.2rem;">⬇ Download E-Books (PDF)</a>
           <div class="support-callout" style="text-align:left; margin-top:1.5rem;">
@@ -1956,7 +2018,7 @@
           <button class="btn btn-outline" style="margin-top:1.5rem;" onclick="closeModal()">Back to Site</button>
         </div>
       `;
-      showToast('Order completed — check your email!');
+      showToast('Order confirmed — details sent to support@smartcarevt.com');
     }
   </script>
 </body>
