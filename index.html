@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Smart Care E-Books — The Undefeated Thinking Master Series. 4 premium digital books on mindset, resilience, and unstoppable performance. Instant PDF delivery." />
+  <title>Smart Care | The Undefeated Thinking E-Books</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & TOKENS ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --ink: #0e0f12;
+      --ink-2: #2c2f38;
+      --ink-3: #565c6b;
+      --ink-4: #9199a8;
+      --border: #e3e5eb;
+      --border-strong: #c8ccd6;
+      --surface: #ffffff;
+      --surface-2: #f6f7fa;
+      --surface-3: #eceef4;
+      --gold: #c9a96e;
+      --gold-light: #f0deb9;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-xl: 32px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 28px rgba(0,0,0,0.09);
+      --shadow-lg: 0 20px 55px rgba(0,0,0,0.14);
+      --shadow-xl: 0 35px 80px rgba(0,0,0,0.2);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--surface-2);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ul, ol { list-style: none; }
+
+
+    /* ===== UTILITY ===== */
+    .container {
+      width: 100%;
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px; height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--ink-3);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-top: 0.8rem;
+    }
+    .text-center { text-align: center; }
+    .text-center .section-subtitle { margin-left: auto; margin-right: auto; }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all 0.28s var(--ease);
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background 0.2s;
+    }
+    .btn:hover::after { background: rgba(255,255,255,0.07); }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #fff;
+      padding: 0.85rem 2.2rem;
+      box-shadow: 0 8px 24px rgba(14,15,18,0.25);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(14,15,18,0.32);
+    }
+    .btn-primary:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      padding: 0.83rem 2.2rem;
+      border: 2px solid var(--ink);
+    }
+    .btn-outline:hover {
+      background: var(--ink);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #c9a96e 0%, #e2c18a 50%, #c9a96e 100%);
+      background-size: 200%;
+      color: var(--ink);
+      padding: 1rem 2.8rem;
+      font-size: 1.05rem;
+      box-shadow: 0 8px 30px rgba(201,169,110,0.4);
+    }
+    .btn-gold:hover {
+      background-position: 100%;
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(201,169,110,0.55);
+    }
+
+    .btn-lg { padding: 1.05rem 3rem; font-size: 1.08rem; }
+    .btn-sm { padding: 0.6rem 1.4rem; font-size: 0.88rem; }
+    .btn-block { width: 100%; }
+
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      transition: all 0.4s var(--ease);
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      padding: 0 2.5rem;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .nav-logo img {
+      height: 38px;
+      width: auto;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.08));
+    }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      width: 24px; height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: all 0.3s;
+      display: block;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 899;
+      padding: 1.5rem 2rem;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: all 0.3s var(--ease);
+    }
+    .mobile-menu.open {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .mobile-menu a {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 9rem 2rem 6rem;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 80% 70% at 50% 0%, rgba(201,169,110,0.07) 0%, transparent 70%),
+        linear-gradient(180deg, #ffffff 0%, #f6f7fa 100%);
+    }
+
+    /* Grid paper lines decoration */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.35);
+      color: #8b6914;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.45rem 1.2rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s var(--ease) both;
+    }
+    .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 900px;
+      margin: 0 auto 1.6rem;
+      animation: fadeUp 0.7s 0.1s var(--ease) both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: var(--ink-3);
+      max-width: 620px;
+      margin: 0 auto 2.8rem;
+      line-height: 1.75;
+      animation: fadeUp 0.7s 0.2s var(--ease) both;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s var(--ease) both;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3.5rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.4s var(--ease) both;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink-3);
+    }
+    .trust-item svg { width: 17px; height: 17px; color: var(--gold); flex-shrink: 0; }
+
+    .hero-books-preview {
+      margin-top: 5rem;
+      position: relative;
+      animation: fadeUp 0.8s 0.5s var(--ease) both;
+    }
+    .books-float-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1.2rem;
+    }
+    .books-float-wrap .bk {
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .books-float-wrap .bk img { width: 100%; height: auto; display: block; }
+    .books-float-wrap .bk:nth-child(1) { width: 140px; transform: rotate(-6deg) translateY(20px); }
+    .books-float-wrap .bk:nth-child(2) { width: 155px; transform: rotate(-2deg) translateY(8px); }
+    .books-float-wrap .bk:nth-child(3) { width: 168px; transform: rotate(0deg) translateY(0px); z-index: 2; }
+    .books-float-wrap .bk:nth-child(4) { width: 155px; transform: rotate(2deg) translateY(8px); }
+    .books-float-wrap .bk:hover { transform: rotate(0deg) translateY(-12px) scale(1.05) !important; box-shadow: var(--shadow-xl); z-index: 5; }
+
+
+    /* ===== STATS STRIP ===== */
+    .stats-strip {
+      background: var(--ink);
+      color: #fff;
+      padding: 3rem 2rem;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+
+    /* ===== ABOUT / VALUE PROP ===== */
+    .value-section {
+      padding: 7rem 2rem;
+      background: var(--surface);
+    }
+    .value-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1220px;
+      margin: 0 auto;
+    }
+    .value-feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .value-feature {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .vf-icon {
+      width: 44px; height: 44px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .vf-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .vf-desc {
+      font-size: 0.92rem;
+      color: var(--ink-3);
+      line-height: 1.65;
+    }
+
+    .value-visual {
+      position: relative;
+    }
+    .value-visual-img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+    }
+    .value-visual-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .value-badge-float {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1.6rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 220px;
+    }
+    .vbf-icon { font-size: 2rem; }
+    .vbf-num {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .vbf-label {
+      font-size: 0.78rem;
+      color: var(--ink-3);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+
+    /* ===== BOOKS SECTION ===== */
+    .books-section {
+      padding: 7rem 2rem;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,169,110,0.05) 0%, transparent 60%),
+        var(--surface-2);
+    }
+    .books-section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .books-carousel {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1220px;
+      margin: 0 auto 4rem;
+    }
+
+    .book-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.35s var(--ease);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+    .book-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-strong);
+    }
+
+    .book-cover-wrap {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface-3);
+    }
+    .book-cover-wrap img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.4s var(--ease);
+    }
+    .book-card:hover .book-cover-wrap img {
+      transform: scale(1.04);
+    }
+
+    .book-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+    }
+
+    .book-info {
+      padding: 1.4rem 1.4rem 1.6rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .book-edition {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .book-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 0.7rem;
+    }
+    .book-desc {
+      font-size: 0.88rem;
+      color: var(--ink-3);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.2rem;
+    }
+    .book-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .book-price {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--ink);
+    }
+    .book-preview-btn {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .book-preview-btn:hover { color: var(--ink); }
+
+    .books-bundle-cta {
+      text-align: center;
+    }
+    .bundle-cta-box {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-xl);
+      padding: 3rem 4rem;
+      max-width: 680px;
+      width: 100%;
+      box-shadow: var(--shadow-md);
+      gap: 1.2rem;
+    }
+    .bundle-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .bundle-price {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .bundle-price-old {
+      font-size: 1.4rem;
+      color: var(--ink-4);
+      text-decoration: line-through;
+      font-weight: 500;
+    }
+    .bundle-save {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+    }
+    .bundle-features {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .bf-item {
+      font-size: 0.85rem;
+      color: var(--ink-3);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .bf-item::before { content: '✓'; color: var(--gold); font-weight: 800; }
+
+
+    /* ===== FEATURES / WHY SECTION ===== */
+    .why-section {
+      padding: 7rem 2rem;
+      background: var(--surface);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1220px;
+      margin: 4rem auto 0;
+    }
+    .why-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem;
+      transition: all 0.3s var(--ease);
+    }
+    .why-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
+    }
+    .why-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      width: 56px; height: 56px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .why-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+    .why-desc {
+      font-size: 0.92rem;
+      color: var(--ink-3);
+      line-height: 1.7;
+    }
+
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-section {
+      padding: 7rem 2rem;
+      background: var(--ink);
+    }
+    .testimonials-header { text-align: center; margin-bottom: 4rem; }
+    .testimonials-header .section-label { color: var(--gold); }
+    .testimonials-header .section-title { color: #fff; }
+    .testimonials-header .section-subtitle { color: rgba(255,255,255,0.55); margin: 0 auto; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s var(--ease);
+    }
+    .testimonial-card:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-4px);
+    }
+    .tc-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+    .tc-text {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 1.4rem;
+    }
+    .tc-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .tc-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--ink);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .tc-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+    .tc-role {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+
+    /* ===== FAQ ===== */
+    .faq-section {
+      padding: 7rem 2rem;
+      background: var(--surface-2);
+    }
+    .faq-wrap {
+      max-width: 760px;
+      margin: 3.5rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .faq-item.open {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.3rem 1.6rem;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      gap: 1rem;
+    }
+    .faq-chevron {
+      width: 22px; height: 22px;
+      border: 2px solid var(--border-strong);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s var(--ease), border-color 0.2s;
+      font-size: 0.75rem;
+      color: var(--ink-3);
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+    .faq-a {
+      font-size: 0.92rem;
+      color: var(--ink-3);
+      line-height: 1.75;
+      padding: 0 1.6rem 1.4rem;
+      display: none;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+
+    /* ===== FINAL CTA ===== */
+    .final-cta-section {
+      padding: 7rem 2rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,169,110,0.08) 0%, transparent 70%),
+        var(--surface);
+    }
+    .final-cta-box {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .final-cta-box .section-title {
+      margin-bottom: 1.2rem;
+    }
+    .final-cta-box .section-subtitle {
+      margin: 0 auto 2.5rem;
+    }
+    .cta-guarantee {
+      margin-top: 1.8rem;
+      font-size: 0.88rem;
+      color: var(--ink-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .cg-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+    }
+    .cg-item span { color: var(--gold); }
+
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.55);
+      padding: 5rem 2rem 2.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3.5rem;
+      max-width: 1220px;
+      margin: 0 auto;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand img {
+      height: 36px;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+    .footer-brand-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      max-width: 280px;
+    }
+    .footer-contact a {
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .footer-heading {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .footer-links a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      max-width: 1220px;
+      margin: 2rem auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.82rem;
+    }
+    .footer-bottom a {
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+    .footer-bottom a:hover { color: var(--gold); }
+
+
+    /* ===== MODAL ===== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 10, 0.8);
+      backdrop-filter: blur(16px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s var(--ease);
+    }
+    .modal-backdrop.open {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-box {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      max-width: 780px;
+      width: 100%;
+      padding: 2.8rem;
+      position: relative;
+      box-shadow: var(--shadow-xl);
+      max-height: 88vh;
+      overflow-y: auto;
+      transform: scale(0.94) translateY(24px);
+      transition: all 0.35s var(--ease);
+    }
+    .modal-backdrop.open .modal-box {
+      transform: scale(1) translateY(0);
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 1.4rem; right: 1.4rem;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--ink-3);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .modal-close-btn:hover {
+      background: var(--ink);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+      line-height: 1.2;
+    }
+
+    /* Policy content */
+    .policy-content-area { font-size: 0.95rem; color: var(--ink-2); line-height: 1.8; }
+    .policy-section-subtitle {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-top: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .policy-paragraph { margin-bottom: 0.85rem; }
+    .policy-list-item { margin-left: 1.4rem; margin-bottom: 0.45rem; }
+
+    .support-callout {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1.5rem;
+      margin-top: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--ink-2);
+    }
+    .support-callout-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .support-callout a {
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    /* Forms */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      margin-bottom: 0.4rem;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.97rem;
+      background: var(--surface-2);
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--ink);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(14,15,18,0.06);
+    }
+    select.form-input { appearance: none; cursor: pointer; }
+
+    .checkout-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin: 1rem 0 1.6rem;
+    }
+    .checkout-price { font-family: var(--font-display); font-size: 2.6rem; font-weight: 900; color: var(--ink); line-height: 1; }
+    .checkout-price-old { font-size: 1.3rem; color: var(--ink-4); text-decoration: line-through; font-weight: 500; }
+    .checkout-save { background: #e8f5e9; color: #2e7d32; font-size: 0.82rem; font-weight: 800; padding: 3px 10px; border-radius: var(--radius-pill); }
+
+    .secure-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--ink-4);
+      margin-top: 1.2rem;
+      line-height: 1.6;
+    }
+
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 30px; left: 50%;
+      transform: translateX(-50%) translateY(60px);
+      background: var(--ink);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-lg);
+      z-index: 3000;
+      opacity: 0;
+      transition: all 0.4s var(--ease);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--surface-2); }
+    ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .value-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .value-visual { max-width: 540px; margin: 0 auto; }
+      .books-carousel { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .stat-item:nth-child(2), .stat-item:last-child { border-bottom: none; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta .btn-outline { display: none; }
+      .nav-hamburger { display: flex; }
+      .books-carousel { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; }
+      .why-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .bundle-cta-box { padding: 2rem 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-books-preview { display: none; }
+      .books-float-wrap .bk:nth-child(1),
+      .books-float-wrap .bk:nth-child(4) { display: none; }
+      .modal-box { padding: 1.8rem; border-radius: var(--radius-lg); }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="nav-logo">
+        <img src="assets/logo_transparent.png" alt="Smart Care" />
+      </a>
+
+      <div class="nav-links">
+        <a href="#books">Books</a>
+        <a href="#why">Why Us</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="nav-cta">
+        <button class="btn btn-outline btn-sm" onclick="openContactModal()">Contact</button>
+        <button class="btn btn-primary btn-sm" onclick="openCheckoutModal()">Buy Now</button>
+      </div>
+
+      <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#books" onclick="toggleMenu()">Books</a>
+    <a href="#why" onclick="toggleMenu()">Why Us</a>
+    <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+    <a href="#faq" onclick="toggleMenu()">FAQ</a>
+    <a href="#" onclick="openContactModal(); toggleMenu();">Contact</a>
+    <button class="btn btn-primary btn-block" onclick="openCheckoutModal(); toggleMenu();">Buy Bundle — $29.99</button>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-badge"><span></span> E-BOOKS BY SMART CARE</div>
+
+    <h1 class="hero-title">
+      The <em>Undefeated</em><br />Thinking Series
+    </h1>
+
+    <p class="hero-desc">
+      Four meticulously crafted premium e-books engineered to rewire your mindset, build unstoppable resilience, and unlock a higher standard of performance — delivered instantly to your inbox.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn btn-gold btn-lg" onclick="openCheckoutModal()">Get All 4 Books — $29.99</button>
+      <a href="#books" class="btn btn-outline btn-lg">View Books</a>
+    </div>
+
+    <div class="hero-trust">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Instant Secure Delivery
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        3-Day Money-Back Guarantee
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        256-Bit SSL Encrypted
+      </div>
+    </div>
+
+    <div class="hero-books-preview">
+      <div class="books-float-wrap">
+        <div class="bk"><img src="assets/book_teal.png" alt="Book I"></div>
+        <div class="bk"><img src="assets/book_red.png" alt="Book II"></div>
+        <div class="bk"><img src="assets/book_blue.png" alt="Book III"></div>
+        <div class="bk"><img src="assets/book_dark.png" alt="Book IV"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== STATS STRIP ===== -->
+  <div class="stats-strip">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Premium E-Books</div>
+      </div>
+      <div class="stat-item reveal reveal-d1">
+        <div class="stat-number">PDF</div>
+        <div class="stat-label">Instant Digital Delivery</div>
+      </div>
+      <div class="stat-item reveal reveal-d2">
+        <div class="stat-number">3-Day</div>
+        <div class="stat-label">Money-Back Guarantee</div>
+      </div>
+      <div class="stat-item reveal reveal-d3">
+        <div class="stat-number">2 Hrs</div>
+        <div class="stat-label">Support Response Time</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== VALUE / ABOUT ===== -->
+  <section class="value-section">
+    <div class="value-grid container">
+      <!-- LEFT -->
+      <div>
+        <div class="section-label reveal">About the Series</div>
+        <h2 class="section-title reveal reveal-d1">
+          Thinking that<br/>refuses to lose
+        </h2>
+        <p class="section-subtitle reveal reveal-d2">
+          The Undefeated Thinking series is a complete blueprint for developing an elite mental framework. From foundational resilience to lasting legacy — four volumes, one transformational journey.
+        </p>
+
+        <div class="value-feature-list">
+          <div class="value-feature reveal reveal-d1">
+            <div class="vf-icon">📖</div>
+            <div>
+              <div class="vf-title">Complete Digital Library</div>
+              <div class="vf-desc">All four books in professional PDF format — ready for mobile, tablet, Kindle, or desktop reading.</div>
+            </div>
+          </div>
+          <div class="value-feature reveal reveal-d2">
+            <div class="vf-icon">⚡</div>
+            <div>
+              <div class="vf-title">Instant Access</div>
+              <div class="vf-desc">Download link activated on your order confirmation page. No waiting, no shipping delays.</div>
+            </div>
+          </div>
+          <div class="value-feature reveal reveal-d3">
+            <div class="vf-icon">🔒</div>
+            <div>
+              <div class="vf-title">100% Risk-Free Purchase</div>
+              <div class="vf-desc">Not satisfied within 3 days? Email us for a full refund — no questions, no hassle.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT visual -->
+      <div class="value-visual reveal">
+        <div class="value-visual-img">
+          <img src="assets/page_2.png" alt="Smart Care Books Bundle" />
+        </div>
+        <div class="value-badge-float">
+          <div class="vbf-icon">🏆</div>
+          <div>
+            <div class="vbf-num">4-Book</div>
+            <div class="vbf-label">Complete Master Series</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== BOOKS SECTION ===== -->
+  <section class="books-section" id="books">
+    <div class="books-section-header">
+      <div class="section-label reveal">The Collection</div>
+      <h2 class="section-title reveal reveal-d1">Four Books. One Journey.</h2>
+      <p class="section-subtitle reveal reveal-d2">Each volume builds on the last — forming a complete, progressive system for total mental and strategic transformation.</p>
+    </div>
+
+    <div class="books-carousel">
+      <!-- Book I -->
+      <div class="book-card reveal" onclick="openBookModal('The Undefeated Thinking — Edition I', 'assets/book_teal.png', 'Foundational Mindset & Resilience', 'Master mental resilience and foundational clarity. Discover the timeless principles of undefeated thinking crafted for leaders, visionaries, and high performers seeking uncompromising self-mastery and a life of purposeful excellence.')">
+        <div class="book-cover-wrap">
+          <div class="book-badge">Book I</div>
+          <img src="assets/book_teal.png" alt="Book I - Teal">
+        </div>
+        <div class="book-info">
+          <div class="book-edition">Edition I · Teal</div>
+          <div class="book-title">Mindset &amp; Resilience</div>
+          <div class="book-desc">The foundational volume. Build an unbreakable mental architecture and discover the core principles behind true high performance.</div>
+          <div class="book-footer">
+            <div class="book-price">$9.99</div>
+            <div class="book-preview-btn">Preview →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book II -->
+      <div class="book-card reveal reveal-d1" onclick="openBookModal('The Undefeated Thinking — Edition II', 'assets/book_red.png', 'Overcoming Adversity & Emotional Alchemy', 'Overcome emotional friction, self-doubt, and the fear of failure. Turn every obstacle into raw fuel and build unstoppable momentum in your professional and personal pursuits through actionable clarity.')">
+        <div class="book-cover-wrap">
+          <div class="book-badge">Book II</div>
+          <img src="assets/book_red.png" alt="Book II - Red">
+        </div>
+        <div class="book-info">
+          <div class="book-edition">Edition II · Red</div>
+          <div class="book-title">Overcoming Adversity</div>
+          <div class="book-desc">Turn friction into fuel. The second volume tackles fear, setback, and emotional paralysis with practical frameworks for breakthrough.</div>
+          <div class="book-footer">
+            <div class="book-price">$9.99</div>
+            <div class="book-preview-btn">Preview →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book III -->
+      <div class="book-card reveal reveal-d2" onclick="openBookModal('The Undefeated Thinking — Edition III', 'assets/book_blue.png', 'Strategic Execution & Deep Focus', 'Strategic clarity and hyper-focused discipline. Cultivate iron-willed execution and laser-sharp focus under high-pressure personal and professional environments through proven systems of performance.')">
+        <div class="book-cover-wrap">
+          <div class="book-badge">Book III</div>
+          <img src="assets/book_blue.png" alt="Book III - Blue">
+        </div>
+        <div class="book-info">
+          <div class="book-edition">Edition III · Blue</div>
+          <div class="book-title">Strategic Execution</div>
+          <div class="book-desc">Laser precision meets iron discipline. Volume three arms you with elite execution strategies used by the world's top performers.</div>
+          <div class="book-footer">
+            <div class="book-price">$9.99</div>
+            <div class="book-preview-btn">Preview →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book IV -->
+      <div class="book-card reveal reveal-d3" onclick="openBookModal('The Undefeated Thinking — Edition IV', 'assets/book_dark.png', 'Legacy, Mastery & Long-Term Triumph', 'Mastery, legacy, and long-term triumph. The capstone guide to developing an enduring mindset that never yields to adversity — and creates generational impact and irreversible forward momentum.')">
+        <div class="book-cover-wrap">
+          <div class="book-badge">Book IV</div>
+          <img src="assets/book_dark.png" alt="Book IV - Dark">
+        </div>
+        <div class="book-info">
+          <div class="book-edition">Edition IV · Charcoal</div>
+          <div class="book-title">Legacy &amp; Triumph</div>
+          <div class="book-desc">The capstone volume. Craft an enduring legacy and develop the long-view thinking required to sustain elite performance indefinitely.</div>
+          <div class="book-footer">
+            <div class="book-price">$9.99</div>
+            <div class="book-preview-btn">Preview →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bundle CTA -->
+    <div class="books-bundle-cta">
+      <div class="bundle-cta-box reveal">
+        <div class="section-label" style="margin-bottom:0;">Best Value</div>
+        <h3 style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--ink);">Get the Complete Bundle</h3>
+        <div class="bundle-price-row">
+          <div class="bundle-price">$29.99</div>
+          <div class="bundle-price-old">$79.99</div>
+          <div class="bundle-save">SAVE 62%</div>
+        </div>
+        <div class="bundle-features">
+          <div class="bf-item">All 4 premium books</div>
+          <div class="bf-item">Instant PDF delivery</div>
+          <div class="bf-item">3-day money-back guarantee</div>
+          <div class="bf-item">Lifetime access</div>
+        </div>
+        <button class="btn btn-gold btn-lg" style="margin-top:0.5rem;" onclick="openCheckoutModal()">Buy Bundle Now — $29.99</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== WHY US ===== -->
+  <section class="why-section" id="why">
+    <div class="container text-center">
+      <div class="section-label reveal">Why Smart Care</div>
+      <h2 class="section-title reveal reveal-d1">Built different. Priced fairly.</h2>
+      <p class="section-subtitle reveal reveal-d2">We don't do fluff. Every page is purposeful, every principle is actionable, and every purchase is protected.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">Instant Delivery</div>
+        <div class="why-desc">Forget waiting. Your download link appears on the confirmation page the second your payment clears — and hits your email within minutes.</div>
+      </div>
+      <div class="why-card reveal reveal-d1">
+        <div class="why-icon">🛡️</div>
+        <div class="why-title">3-Day Refund Guarantee</div>
+        <div class="why-desc">Didn't love it? Email us within 3 days for a full, no-questions refund. We stand behind every word of these books completely.</div>
+      </div>
+      <div class="why-card reveal reveal-d2">
+        <div class="why-icon">📱</div>
+        <div class="why-title">Read Anywhere</div>
+        <div class="why-desc">PDF format is compatible with every device — iPhone, Android, Kindle, Mac, Windows. No special software or subscriptions required.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">🎯</div>
+        <div class="why-title">Actionable, Not Academic</div>
+        <div class="why-desc">Written for real-world execution. Every concept comes with a practical framework you can apply the same day you read it.</div>
+      </div>
+      <div class="why-card reveal reveal-d1">
+        <div class="why-icon">🔒</div>
+        <div class="why-title">Secure & Private</div>
+        <div class="why-desc">Your payment is processed with 256-bit SSL encryption. We never see or store your card details — ever.</div>
+      </div>
+      <div class="why-card reveal reveal-d2">
+        <div class="why-icon">📩</div>
+        <div class="why-title">Real Human Support</div>
+        <div class="why-desc">Our support desk at support@smartcarevt.com is staffed Monday through Saturday and replies within 2 business days.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="testimonials-header">
+      <div class="section-label">Customer Reviews</div>
+      <h2 class="section-title reveal">What readers are saying</h2>
+      <p class="section-subtitle reveal reveal-d1">Real feedback from real readers across Pakistan, USA, Canada, and the UAE.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"I purchased the bundle and consumed all four books in a week. Edition I alone rewired how I approach challenge. These aren't just motivational reads — they're operational manuals."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">A</div>
+          <div>
+            <div class="tc-name">Ahmed K.</div>
+            <div class="tc-role">Entrepreneur, Dubai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d1">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"Edition III on strategic execution completely changed how I plan my work week. The chapter on deep-focus systems alone was worth 10x the purchase price. Instant delivery too — impressive."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">S</div>
+          <div>
+            <div class="tc-name">Sarah M.</div>
+            <div class="tc-role">Marketing Director, Toronto</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"Bought just Book II first, then immediately came back for the full bundle. The writing is dense with value, not filler. Smart Care clearly knows what serious readers want."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">Z</div>
+          <div>
+            <div class="tc-name">Zara F.</div>
+            <div class="tc-role">Product Lead, Karachi</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"Edition IV on legacy is genuinely one of the most thoughtful long-form reads I've encountered on the topic of lasting success. It doesn't promise shortcuts — it delivers truth."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">R</div>
+          <div>
+            <div class="tc-name">Raza H.</div>
+            <div class="tc-role">Startup Founder, Islamabad</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d1">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"Customer support replied within a day when I had an issue with my download link. They resolved it immediately and even threw in a personal note. Rare professionalism in this space."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">L</div>
+          <div>
+            <div class="tc-name">Lena D.</div>
+            <div class="tc-role">Coach &amp; Speaker, Houston</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"The bundle price is a steal. I've paid more for single books that delivered a fraction of the value. The 3-day refund policy made me trust them immediately — and I didn't need it."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">O</div>
+          <div>
+            <div class="tc-name">Omar N.</div>
+            <div class="tc-role">Finance Manager, Calgary</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq-section" id="faq">
+    <div class="container text-center">
+      <div class="section-label reveal">FAQ</div>
+      <h2 class="section-title reveal reveal-d1">Questions? Answered.</h2>
+      <p class="section-subtitle reveal reveal-d2">Everything you need to know before purchasing. Still unsure? Email us at <a href="mailto:support@smartcarevt.com" style="color: var(--gold); font-weight:700;">support@smartcarevt.com</a></p>
+    </div>
+
+    <div class="faq-wrap">
+      <div class="faq-item reveal" onclick="toggleFAQ(this)">
+        <button class="faq-q">What format are the books delivered in? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">All four e-books are delivered as PDF files — the most universally compatible digital format. You can read them on any smartphone (iOS or Android), tablet, Kindle, MacBook, or Windows PC using free PDF readers like Adobe Acrobat Reader or the reader built into your browser.</div>
+      </div>
+      <div class="faq-item reveal reveal-d1" onclick="toggleFAQ(this)">
+        <button class="faq-q">How quickly will I receive the books after purchasing? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">Instantly. The moment your payment is confirmed, a secure download link appears on your order confirmation page. We also send the same link to your email address within a few minutes. If you don't see the email, please check your spam or junk folder.</div>
+      </div>
+      <div class="faq-item reveal reveal-d2" onclick="toggleFAQ(this)">
+        <button class="faq-q">What is your refund policy? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">We offer a full 3-Day (72-hour) Money-Back Guarantee. If you're not satisfied for any reason, email support@smartcarevt.com within 3 days of your purchase with your order number and we will process a full refund to your original payment method within 3–5 business days. No complicated forms, no runaround.</div>
+      </div>
+      <div class="faq-item reveal" onclick="toggleFAQ(this)">
+        <button class="faq-q">Can I buy individual books instead of the full bundle? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">Yes! Each book is available individually for $9.99. However, the complete bundle of all four books is priced at $29.99 — saving you 62% versus buying them separately. The bundle is by far our most popular option and the best way to experience the complete Undefeated Thinking system.</div>
+      </div>
+      <div class="faq-item reveal reveal-d1" onclick="toggleFAQ(this)">
+        <button class="faq-q">Is my payment information secure? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">Absolutely. All payments are processed through certified third-party payment processors using 256-bit SSL encryption — the same standard used by banks. We never see, collect, or store your full card number, CVV, or banking credentials.</div>
+      </div>
+      <div class="faq-item reveal reveal-d2" onclick="toggleFAQ(this)">
+        <button class="faq-q">How do I contact support if I have an issue? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">Email us at support@smartcarevt.com — our support desk is open Monday to Saturday and we typically respond within 2 business days. For urgent download or technical issues, reference your order number and we will prioritise your case.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== FINAL CTA ===== -->
+  <section class="final-cta-section">
+    <div class="final-cta-box reveal">
+      <div class="section-label">Start Today</div>
+      <h2 class="section-title">
+        Your mindset is either<br/>working for you — or against you.
+      </h2>
+      <p class="section-subtitle">
+        The Undefeated Thinking series is designed to make it work for you. All four volumes, delivered to your inbox in seconds.
+      </p>
+      <button class="btn btn-gold btn-lg" onclick="openCheckoutModal()">Get All 4 Books — $29.99</button>
+      <div class="cta-guarantee">
+        <div class="cg-item"><span>✓</span> Instant PDF Delivery</div>
+        <div class="cg-item"><span>✓</span> 3-Day Refund Guarantee</div>
+        <div class="cg-item"><span>✓</span> One-Time Payment</div>
+        <div class="cg-item"><span>✓</span> Lifetime Access</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <img src="assets/logo_transparent.png" alt="Smart Care" />
+        <div class="footer-brand-desc">
+          Smart Care E Books is a premium digital publishing brand under Smart Care Bill Pvt Ltd. We create high-impact educational e-books for ambitious individuals worldwide.
+        </div>
+        <div class="footer-contact">
+          <div style="margin-bottom: 0.4rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);">Support</div>
+          <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a>
+        </div>
+      </div>
+
+      <!-- Books -->
+      <div>
+        <div class="footer-heading">Collection</div>
+        <div class="footer-links">
+          <a onclick="openBookModal('The Undefeated Thinking — Edition I', 'assets/book_teal.png', 'Foundational Mindset & Resilience', 'Master mental resilience and foundational clarity. Discover the timeless principles of undefeated thinking crafted for leaders and visionaries.')">Book I — Mindset</a>
+          <a onclick="openBookModal('The Undefeated Thinking — Edition II', 'assets/book_red.png', 'Overcoming Adversity & Emotional Alchemy', 'Overcome emotional friction, self-doubt, and fear of failure. Turn obstacles into raw fuel for unstoppable momentum.')">Book II — Adversity</a>
+          <a onclick="openBookModal('The Undefeated Thinking — Edition III', 'assets/book_blue.png', 'Strategic Execution & Deep Focus', 'Strategic clarity and hyper-focused discipline. Iron-willed execution under high-pressure environments.')">Book III — Execution</a>
+          <a onclick="openBookModal('The Undefeated Thinking — Edition IV', 'assets/book_dark.png', 'Legacy, Mastery & Long-Term Triumph', 'Mastery and long-term triumph. The capstone guide to developing an enduring mindset that never yields to adversity.')">Book IV — Legacy</a>
+          <a onclick="openCheckoutModal()" style="color: var(--gold); font-weight:700;">Bundle of 4 — $29.99 →</a>
+        </div>
+      </div>
+
+      <!-- Policies -->
+      <div>
+        <div class="footer-heading">Policies</div>
+        <div class="footer-links">
+          <a onclick="openPolicyModal('Terms of Service')">Terms of Service</a>
+          <a onclick="openPolicyModal('Refund Policy')">Refund Policy</a>
+          <a onclick="openPolicyModal('Delivery Policy')">Delivery Policy</a>
+          <a onclick="openPolicyModal('Privacy Policy')">Privacy Policy</a>
+          <a onclick="openPolicyModal('Disclaimer')">Disclaimer</a>
+        </div>
+      </div>
+
+      <!-- Support -->
+      <div>
+        <div class="footer-heading">Support</div>
+        <div class="footer-links">
+          <a onclick="openContactModal()">Contact Us</a>
+          <a onclick="toggleFAQ(document.querySelector('.faq-item')); document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
+          <a onclick="openPolicyModal('Refund Policy')">Request Refund</a>
+          <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a>
+        </div>
+        <div style="margin-top: 1.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.6;">
+          Mon – Sat<br/>Response within 2 business days
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div style="color: rgba(255,255,255,0.35);">
+        &copy; 2026 Smart Care E Books · Operated by Smart Care Bill Pvt Ltd · Islamabad, Pakistan
+      </div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a onclick="openPolicyModal('Privacy Policy')">Privacy</a>
+        <a onclick="openPolicyModal('Terms of Service')">Terms</a>
+        <a onclick="openPolicyModal('Disclaimer')">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ===== MODAL ===== -->
+  <div id="infoModal" class="modal-backdrop" onclick="handleBackdropClick(event)">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- Policies Data -->
+  <script src="policies_data.js"></script>
+
+  <script>
+    const SUPPORT_EMAIL = 'support@smartcarevt.com';
+
+    /* ----- Navbar scroll effect ----- */
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    /* ----- Mobile menu ----- */
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    /* ----- Scroll reveal ----- */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ----- FAQ accordion ----- */
+    function toggleFAQ(item) {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* ----- Modal helpers ----- */
+    const modal = document.getElementById('infoModal');
+    const modalContent = document.getElementById('modalContent');
+
+    function openModal(html) {
+      modalContent.innerHTML = html;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function handleBackdropClick(e) { if (e.target === modal) closeModal(); }
+
+    /* ----- Toast ----- */
+    const toast = document.getElementById('toast');
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    /* ----- Policy modals ----- */
+    function openPolicyModal(name) {
+      const content = STORE_POLICIES[name] || '<p>Content coming soon.</p>';
+      openModal(`
+        <h2 class="modal-title">${name}</h2>
+        <div class="policy-content-area">${content}</div>
+        <div class="support-callout">
+          <span class="support-callout-icon">📩</span>
+          <div>Have questions about this policy? Email us at <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a> — we reply within 2 business days.</div>
+        </div>
+      `);
+    }
+
+    /* ----- Contact modal ----- */
+    function openContactModal() {
+      const details = STORE_POLICIES['Contact Us Details'] || '';
+      openModal(`
+        <h2 class="modal-title">Contact Us</h2>
+        <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.4rem 1.6rem; margin-bottom: 1.8rem;">
+          <div style="display:grid; grid-template-columns: repeat(3,1fr); gap: 1rem;">
+            <div>
+              <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color: var(--ink-3); margin-bottom:0.3rem;">Email</div>
+              <a href="mailto:${SUPPORT_EMAIL}" style="color:var(--ink); font-weight:700; font-size:0.92rem;">${SUPPORT_EMAIL}</a>
+            </div>
+            <div>
+              <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color: var(--ink-3); margin-bottom:0.3rem;">Hours</div>
+              <div style="font-weight:600; font-size:0.92rem;">Mon – Saturday</div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color: var(--ink-3); margin-bottom:0.3rem;">Response</div>
+              <div style="font-weight:600; font-size:0.92rem;">Within 2 business days</div>
+            </div>
+          </div>
+        </div>
+        <form onsubmit="handleContactSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input class="form-input" type="text" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Your Email</label>
+              <input class="form-input" type="email" required placeholder="john@example.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <input class="form-input" type="text" required placeholder="Order inquiry, Download issue, Refund request…">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-input" rows="4" required placeholder="Please describe your issue or question in detail…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:0.8rem;">Send Message</button>
+        </form>
+      `);
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      modalContent.innerHTML = `
+        <div style="text-align:center; padding: 3rem 1rem;">
+          <div style="font-size:3.5rem; margin-bottom:1.2rem;">✉️</div>
+          <h2 class="modal-title" style="border:none; justify-content:center;">Message Sent</h2>
+          <p style="color: var(--ink-3); font-size:1.05rem; line-height:1.75; margin-bottom:2rem; max-width:420px; margin-left:auto; margin-right:auto;">
+            Your inquiry has been received. Our team at <strong>${SUPPORT_EMAIL}</strong> will respond within 2 business days.
+          </p>
+          <button class="btn btn-outline" onclick="closeModal()">Back to Site</button>
+        </div>
+      `;
+      showToast('Message sent successfully');
+    }
+
+    /* ----- Book modal ----- */
+    function openBookModal(title, img, subtitle, desc) {
+      openModal(`
+        <div style="display:grid; grid-template-columns: 200px 1fr; gap: 2rem; align-items:start;">
+          <img src="${img}" alt="${title}" style="border-radius:8px; box-shadow: var(--shadow-lg); width:100%;">
+          <div>
+            <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem;">${subtitle}</div>
+            <h2 class="modal-title" style="border:none; padding:0; margin-bottom:1rem; font-size:1.5rem;">${title}</h2>
+            <p style="font-size:0.97rem; color:var(--ink-3); line-height:1.78; margin-bottom:1.5rem;">${desc}</p>
+            <div style="display:flex; flex-direction:column; gap:0.8rem;">
+              <button class="btn btn-primary" onclick="openCheckoutModal('${title}')">Purchase Single — $9.99</button>
+              <button class="btn btn-gold" onclick="openCheckoutModal()">Get Full Bundle — $29.99 <span style='background:rgba(0,0,0,0.12); padding:2px 8px; border-radius:20px; font-size:0.76rem; margin-left:4px;'>BEST VALUE</span></button>
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    /* ----- Checkout modal ----- */
+    function openCheckoutModal(itemTitle = 'Bundle of 4 Books — The Undefeated Thinking') {
+      const isBundle = !itemTitle.includes('Edition');
+      const price = isBundle ? '$29.99' : '$9.99';
+      const orig  = isBundle ? '$79.99' : '$19.99';
+      openModal(`
+        <h2 class="modal-title">Secure Checkout</h2>
+        <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-md); padding:1rem 1.4rem; margin-bottom:1.4rem; font-size:0.92rem; color:var(--ink-2);">
+          <strong>Item:</strong> ${itemTitle}
+        </div>
+        <div class="checkout-price-row">
+          <div class="checkout-price">${price}</div>
+          <div class="checkout-price-old">${orig}</div>
+          <div class="checkout-save">SAVE ${isBundle ? '62%' : '50%'}</div>
+        </div>
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:var(--radius-sm); padding:0.9rem 1.1rem; margin-bottom:1.6rem; font-size:0.88rem; color:#166534; font-weight:600; display:flex; align-items:center; gap:0.6rem;">
+          ⚡ Instant PDF delivery — download link activated immediately after payment
+        </div>
+        <form onsubmit="handleCheckoutSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input class="form-input" type="text" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input class="form-input" type="email" required placeholder="john@example.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Card Number</label>
+            <input class="form-input" type="text" required placeholder="1234  5678  9012  3456" maxlength="19">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Expiry</label>
+              <input class="form-input" type="text" required placeholder="MM / YY" maxlength="7">
+            </div>
+            <div class="form-group">
+              <label class="form-label">CVC</label>
+              <input class="form-input" type="text" required placeholder="123" maxlength="4">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:0.8rem;">Complete Purchase &amp; Download</button>
+          <div class="secure-note">
+            🔒 256-Bit SSL Encrypted &nbsp;·&nbsp; 3-Day Money-Back Guarantee &nbsp;·&nbsp; support@smartcarevt.com
+          </div>
+        </form>
+      `);
+    }
+
+    function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      modalContent.innerHTML = `
+        <div style="text-align:center; padding:3rem 1rem;">
+          <div style="font-size:3.8rem; margin-bottom:1.2rem;">🎉</div>
+          <h2 class="modal-title" style="border:none; justify-content:center;">Payment Successful!</h2>
+          <p style="color:var(--ink-3); font-size:1.05rem; line-height:1.75; margin-bottom:2rem; max-width:420px; margin-left:auto; margin-right:auto;">
+            Your order is confirmed. Download your e-books now using the button below — the same link has also been dispatched to your email address.
+          </p>
+          <a href="#" onclick="showToast('Starting download…'); return false;" class="btn btn-primary btn-lg" style="margin-bottom:1.2rem;">⬇ Download E-Books (PDF)</a>
+          <div class="support-callout" style="text-align:left; margin-top:1.5rem;">
+            <span class="support-callout-icon">📩</span>
+            <div style="font-size:0.88rem;">
+              Need download help? Email <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>. Covered by our 3-Day Refund Guarantee.
+            </div>
+          </div>
+          <button class="btn btn-outline" style="margin-top:1.5rem;" onclick="closeModal()">Back to Site</button>
+        </div>
+      `;
+      showToast('Order completed — check your email!');
+    }
+  </script>
+</body>
+</html>
