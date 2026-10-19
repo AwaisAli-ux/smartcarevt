@@ -22,7 +22,7 @@ Last updated: October 10, 2026
 
 1. Introduction and Acceptance
 
-These Terms of Service ("Terms") govern your use of our website and your purchase of digital products from Smart Care E Books ("we", "us", "our"), operated by Smart Care Bill Pvt Ltd. By visiting our website, placing an order, or downloading any product, you confirm that you have read, understood, and agreed to these Terms, our Refund Policy, our Delivery Policy, and our Privacy Policy. If you do not agree, please do not use our website or buy our products.
+These Terms of Service ("Terms") govern your use of our website and your purchase of digital products from Smart Care E Books ("we", "us", "our"). By visiting our website, placing an order, or downloading any product, you confirm that you have read, understood, and agreed to these Terms, our Refund Policy, our Delivery Policy, and our Privacy Policy. If you do not agree, please do not use our website or buy our products.
 
 2. Eligibility
 
@@ -90,7 +90,7 @@ Our website and products are provided "as is" and "as available". To the fullest
 
 12. Limitation of Liability
 
-To the fullest extent permitted by law, Smart Care E Books, Smart Care Bill Pvt Ltd, and our directors, employees, and partners will not be liable for any indirect, incidental, special, or consequential damages arising from your use of the website or products. Our total liability for any claim relating to a purchase will not exceed the amount you paid for that product. Nothing in these Terms excludes rights you have under mandatory consumer protection laws that cannot be excluded.
+To the fullest extent permitted by law, Smart Care E Books, and our directors, employees, and partners will not be liable for any indirect, incidental, special, or consequential damages arising from your use of the website or products. Our total liability for any claim relating to a purchase will not exceed the amount you paid for that product. Nothing in these Terms excludes rights you have under mandatory consumer protection laws that cannot be excluded.
 
 13. Third-Party Services
 
@@ -298,7 +298,7 @@ We may update this Privacy Policy from time to time. The latest version will alw
 
 11. Contact
 
-Smart Care E Books, operated by Smart Care Bill Pvt Ltd, [YOUR BUSINESS ADDRESS], Islamabad, Pakistan. Email: [YOUR SUPPORT EMAIL].
+Smart Care E Books, [YOUR BUSINESS ADDRESS], Islamabad, Pakistan. Email: [YOUR SUPPORT EMAIL].
 
 Part 5: Disclaimer
 
@@ -310,7 +310,7 @@ We have taken care to make our content accurate and useful, but we do not warran
 
 Contact Us
 
-Smart Care E Books  |  Operated by Smart Care Bill Pvt Ltd
+Smart Care E Books
 
 Email: [YOUR SUPPORT EMAIL]    Website: [YOUR WEBSITE URL]
 
