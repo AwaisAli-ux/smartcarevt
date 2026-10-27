@@ -1,0 +1,959 @@
+import json
+import os
+
+# Load policies
+with open('policies_data.js', 'r', encoding='utf-8') as f:
+    js_content = f.read()
+
+json_str = js_content.strip()
+if json_str.startswith('const STORE_POLICIES ='):
+    json_str = json_str[len('const STORE_POLICIES ='):].strip()
+if json_str.endswith(';'):
+    json_str = json_str[:-1].strip()
+
+policies = json.loads(json_str)
+
+def get_base_html(title, desc, active_nav, body_content, extra_head=""):
+    active_books = 'style="color:var(--gold); font-weight:700;"' if active_nav == 'books' else ''
+    active_why = 'style="color:var(--gold); font-weight:700;"' if active_nav == 'why' else ''
+    active_reviews = 'style="color:var(--gold); font-weight:700;"' if active_nav == 'reviews' else ''
+    active_faq = 'style="color:var(--gold); font-weight:700;"' if active_nav == 'faq' else ''
+
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{desc}" />
+  <title>{title} | Smart Care E-Books</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  {extra_head}
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo_transparent.png" alt="Smart Care" />
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="books.html" {active_books}>Books</a>
+        <a href="why-us.html" {active_why}>Why Us</a>
+        <a href="reviews.html" {active_reviews}>Reviews</a>
+        <a href="faq.html" {active_faq}>FAQ</a>
+      </div>
+
+      <div class="nav-cta">
+        <a href="contact.html" class="btn btn-outline btn-sm">Contact</a>
+        <button class="btn btn-primary btn-sm" onclick="openCheckoutModal()">Buy Now</button>
+      </div>
+
+      <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMenu()">Home</a>
+    <a href="books.html" onclick="toggleMenu()">Books</a>
+    <a href="why-us.html" onclick="toggleMenu()">Why Us</a>
+    <a href="reviews.html" onclick="toggleMenu()">Reviews</a>
+    <a href="faq.html" onclick="toggleMenu()">FAQ</a>
+    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+    <button class="btn btn-primary btn-block" onclick="openCheckoutModal(); toggleMenu();">Buy Bundle — $350</button>
+  </div>
+
+  {body_content}
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="index.html"><img src="assets/logo_footer.png" alt="Smart Care" /></a>
+        <div class="footer-brand-desc">
+          Smart Care E Books is a premium digital publishing brand. We create high-impact educational e-books for ambitious individuals worldwide.
+        </div>
+        <div class="footer-contact">
+          <div style="margin-bottom: 0.4rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);">Support</div>
+          <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a>
+        </div>
+      </div>
+
+      <!-- Books -->
+      <div>
+        <div class="footer-heading">Collection</div>
+        <div class="footer-links">
+          <a onclick="openBookModal('The Undefeated Thinking — Edition I', 'assets/book_teal.png', 'Foundational Mindset & Resilience', 'Master mental resilience and foundational clarity. Discover the timeless principles of undefeated thinking crafted for leaders and visionaries.')">Book I — Mindset</a>
+          <a onclick="openBookModal('The Undefeated Thinking — Edition II', 'assets/book_red.png', 'Overcoming Adversity & Emotional Alchemy', 'Overcome emotional friction, self-doubt, and fear of failure. Turn obstacles into raw fuel for unstoppable momentum.')">Book II — Adversity</a>
+          <a onclick="openBookModal('The Undefeated Thinking — Edition III', 'assets/book_blue.png', 'Strategic Execution & Deep Focus', 'Strategic clarity and hyper-focused discipline. Iron-willed execution under high-pressure environments.')">Book III — Execution</a>
+          <a onclick="openBookModal('The Undefeated Thinking — Edition IV', 'assets/book_dark.png', 'Legacy, Mastery & Long-Term Triumph', 'Mastery and long-term triumph. The capstone guide to developing an enduring mindset that never yields to adversity.')">Book IV — Legacy</a>
+          <a onclick="openCheckoutModal()" style="color: var(--gold); font-weight:700;">Bundle of 4 — $350 →</a>
+        </div>
+      </div>
+
+      <!-- Policies -->
+      <div>
+        <div class="footer-heading">Policies</div>
+        <div class="footer-links">
+          <a href="terms-of-service.html">Terms of Service</a>
+          <a href="refund-policy.html">Refund Policy</a>
+          <a href="delivery-policy.html">Delivery Policy</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+
+      <!-- Support -->
+      <div>
+        <div class="footer-heading">Support</div>
+        <div class="footer-links">
+          <a href="contact.html">Contact Us</a>
+          <a href="faq.html">FAQ</a>
+          <a href="refund-policy.html">Request Refund</a>
+          <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a>
+        </div>
+        <div style="margin-top: 1.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.6;">
+          Mon – Sat<br/>Response within 2 business days
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div style="color: rgba(255,255,255,0.35);">
+        &copy; 2026 Smart Care E Books
+      </div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms-of-service.html">Terms</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== MODAL ===== -->
+  <div id="infoModal" class="modal-backdrop" onclick="handleBackdropClick(event)">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- Policies Data -->
+  <script src="policies_data.js?v=1.0.1"></script>
+
+  <script>
+    const SUPPORT_EMAIL = 'support@smartcarevt.com';
+
+    /* ----- Navbar scroll effect ----- */
+    window.addEventListener('scroll', () => {{
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    }});
+
+    /* ----- Mobile menu ----- */
+    function toggleMenu() {{
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }}
+
+    /* ----- Scroll reveal ----- */
+    const revealObserver = new IntersectionObserver((entries) => {{
+      entries.forEach(e => {{ if (e.isIntersecting) {{ e.target.classList.add('visible'); revealObserver.unobserve(e.target); }} }});
+    }}, {{ threshold: 0.12 }});
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ----- FAQ accordion ----- */
+    function toggleFAQ(item) {{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }}
+
+    /* ----- Modal helpers ----- */
+    const modal = document.getElementById('infoModal');
+    const modalContent = document.getElementById('modalContent');
+
+    function openModal(html) {{
+      modalContent.innerHTML = html;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }}
+    function closeModal() {{
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }}
+    function handleBackdropClick(e) {{ if (e.target === modal) closeModal(); }}
+
+    /* ----- Toast ----- */
+    const toast = document.getElementById('toast');
+    function showToast(msg) {{
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2800);
+    }}
+
+    /* ----- Book modal ----- */
+    function openBookModal(title, img, subtitle, desc) {{
+      openModal(`
+        <div style="display:grid; grid-template-columns: 200px 1fr; gap: 2rem; align-items:start;">
+          <img src="${{img}}" alt="${{title}}" style="border-radius:8px; box-shadow: var(--shadow-lg); width:100%;">
+          <div>
+            <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem;">${{subtitle}}</div>
+            <h2 class="modal-title" style="border:none; padding:0; margin-bottom:1rem; font-size:1.5rem;">${{title}}</h2>
+            <p style="font-size:0.97rem; color:var(--ink-3); line-height:1.78; margin-bottom:1.5rem;">${{desc}}</p>
+            <div style="display:flex; flex-direction:column; gap:0.8rem;">
+              <button class="btn btn-primary" onclick="openCheckoutModal('${{title}}')">Purchase Single — $99</button>
+              <button class="btn btn-gold" onclick="openCheckoutModal()">Get Full Bundle — $350 <span style='background:rgba(0,0,0,0.12); padding:2px 8px; border-radius:20px; font-size:0.76rem; margin-left:4px;'>BEST VALUE</span></button>
+            </div>
+          </div>
+        </div>
+      `);
+    }}
+
+    /* ----- Checkout modal ----- */
+    function openCheckoutModal(itemTitle = 'Bundle of 4 Books — The Undefeated Thinking') {{
+      const isBundle = !itemTitle.includes('Edition');
+      const price = isBundle ? '$350' : '$99';
+      const orig  = isBundle ? '$799' : '$199';
+      openModal(`
+        <h2 class="modal-title">Secure Checkout</h2>
+        <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-md); padding:1rem 1.4rem; margin-bottom:1.4rem; font-size:0.92rem; color:var(--ink-2);">
+          <strong>Item:</strong> ${{itemTitle}}
+        </div>
+        <div class="checkout-price-row">
+          <div class="checkout-price">${{price}}</div>
+          <div class="checkout-price-old">${{orig}}</div>
+          <div class="checkout-save">SAVE ${{isBundle ? '56%' : '50%'}}</div>
+        </div>
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:var(--radius-sm); padding:0.9rem 1.1rem; margin-bottom:1.6rem; font-size:0.88rem; color:#166534; font-weight:600; display:flex; align-items:center; gap:0.6rem;">
+          ⚡ Instant PDF delivery — download link activated immediately after payment
+        </div>
+        <form action="https://formsubmit.co/support@smartcarevt.com" method="POST" onsubmit="handleCheckoutSubmit(event, '${{itemTitle.replace(/'/g, "\\\\\\'")}}', '${{price}}')">
+          <input type="hidden" name="_subject" value="New E-Book Order — Smart Care VT">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="Order_Item" value="${{itemTitle}}">
+          <input type="hidden" name="Amount" value="${{price}}">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input class="form-input" type="text" name="name" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input class="form-input" type="email" name="email" required placeholder="john@example.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Card Number</label>
+            <input class="form-input" type="text" name="card_number" required placeholder="1234  5678  9012  3456" maxlength="19">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Expiry</label>
+              <input class="form-input" type="text" name="expiry" required placeholder="MM / YY" maxlength="7">
+            </div>
+            <div class="form-group">
+              <label class="form-label">CVC</label>
+              <input class="form-input" type="text" name="cvc" required placeholder="123" maxlength="4">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:0.8rem;">Complete Purchase &amp; Download</button>
+          <div class="secure-note">
+            🔒 256-Bit SSL Encrypted &nbsp;·&nbsp; 3-Day Money-Back Guarantee &nbsp;·&nbsp; support@smartcarevt.com
+          </div>
+        </form>
+      `);
+    }}
+
+    async function handleCheckoutSubmit(e, itemTitle = 'Bundle of 4 Books', price = '$350') {{
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {{
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Processing Order…';
+      }}
+
+      const formData = new FormData(form);
+      const rawCard = formData.get('card_number') || '';
+      const maskedCard = rawCard.length >= 4 ? '**** **** **** ' + rawCard.replace(/\\s+/g, '').slice(-4) : '****';
+      formData.set('card_number', maskedCard);
+      formData.delete('cvc');
+      const data = Object.fromEntries(formData.entries());
+
+      try {{
+        await fetch("https://formsubmit.co/ajax/support@smartcarevt.com", {{
+          method: "POST",
+          headers: {{
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }},
+          body: JSON.stringify(data)
+        }});
+      }} catch (err) {{
+        console.warn("FormSubmit notice:", err);
+      }}
+
+      modalContent.innerHTML = `
+        <div style="text-align:center; padding:3rem 1rem;">
+          <div style="font-size:3.8rem; margin-bottom:1.2rem;">🎉</div>
+          <h2 class="modal-title" style="border:none; justify-content:center;">Payment Successful!</h2>
+          <p style="color:var(--ink-3); font-size:1.05rem; line-height:1.75; margin-bottom:2rem; max-width:420px; margin-left:auto; margin-right:auto;">
+            Your order for <strong>${{itemTitle}}</strong> (${{price}}) is confirmed. Download your e-books now using the button below — the same link and receipt have also been dispatched to your email address.
+          </p>
+          <a href="#" onclick="showToast('Starting download…'); return false;" class="btn btn-primary btn-lg" style="margin-bottom:1.2rem;">⬇ Download E-Books (PDF)</a>
+          <div class="support-callout" style="text-align:left; margin-top:1.5rem;">
+            <span class="support-callout-icon">📩</span>
+            <div style="font-size:0.88rem;">
+              Need download help? Email <a href="mailto:${{SUPPORT_EMAIL}}">${{SUPPORT_EMAIL}}</a>. Covered by our 3-Day Refund Guarantee.
+            </div>
+          </div>
+          <button class="btn btn-outline" style="margin-top:1.5rem;" onclick="closeModal()">Back to Site</button>
+        </div>
+      `;
+      showToast('Order confirmed — details sent to support@smartcarevt.com');
+    }}
+
+    async function handleContactSubmit(e) {{
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {{
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending…';
+      }}
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {{
+        await fetch("https://formsubmit.co/ajax/support@smartcarevt.com", {{
+          method: "POST",
+          headers: {{
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }},
+          body: JSON.stringify(data)
+        }});
+      }} catch (err) {{
+        console.warn("FormSubmit notice:", err);
+      }}
+
+      const responseContainer = document.getElementById('contactFormCard') || modalContent;
+      responseContainer.innerHTML = `
+        <div style="text-align:center; padding: 3rem 1rem;">
+          <div style="font-size:3.5rem; margin-bottom:1.2rem;">✉️</div>
+          <h2 class="modal-title" style="border:none; justify-content:center;">Message Sent</h2>
+          <p style="color: var(--ink-3); font-size:1.05rem; line-height:1.75; margin-bottom:2rem; max-width:420px; margin-left:auto; margin-right:auto;">
+            Your inquiry has been received. Our team at <strong>${{SUPPORT_EMAIL}}</strong> will respond within 2 business days.
+          </p>
+          <a href="index.html" class="btn btn-outline">Back to Home</a>
+        </div>
+      `;
+      showToast('Message sent to support@smartcarevt.com');
+    }}
+  </script>
+</body>
+</html>'''
+
+# ==========================================
+# 1. BOOKS PAGE (books.html)
+# ==========================================
+books_body = '''
+  <header class="page-header">
+    <div class="section-label reveal">The Complete Series</div>
+    <h1 class="page-title reveal reveal-d1">The Undefeated Thinking Collection</h1>
+    <p class="page-subtitle reveal reveal-d2">Four meticulously crafted digital e-books engineered to rebuild your mental architecture, foster iron-willed execution, and develop an enduring legacy.</p>
+  </header>
+
+  <!-- Value Visual Section -->
+  <section class="value-section" style="padding-top: 1rem;">
+    <div class="value-grid container">
+      <div>
+        <div class="section-label reveal">Architecture of Self-Mastery</div>
+        <h2 class="section-title reveal reveal-d1">
+          Thinking that<br/>refuses to lose
+        </h2>
+        <p class="section-subtitle reveal reveal-d2">
+          The Undefeated Thinking series is a complete blueprint for developing an elite mental framework. From foundational resilience to lasting legacy — four volumes, one transformational journey.
+        </p>
+
+        <div class="value-feature-list">
+          <div class="value-feature reveal reveal-d1">
+            <div class="vf-icon">📖</div>
+            <div>
+              <div class="vf-title">Complete Digital Library</div>
+              <div class="vf-desc">All four books in professional PDF format — ready for mobile, tablet, Kindle, or desktop reading.</div>
+            </div>
+          </div>
+          <div class="value-feature reveal reveal-d2">
+            <div class="vf-icon">⚡</div>
+            <div>
+              <div class="vf-title">Instant Access</div>
+              <div class="vf-desc">Download link activated on your order confirmation page. No waiting, no shipping delays.</div>
+            </div>
+          </div>
+          <div class="value-feature reveal reveal-d3">
+            <div class="vf-icon">🔒</div>
+            <div>
+              <div class="vf-title">100% Risk-Free Purchase</div>
+              <div class="vf-desc">Not satisfied within 3 days? Email us for a full refund — no questions, no hassle.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="value-visual reveal">
+        <div class="value-visual-img">
+          <img src="assets/page_2.png" alt="Smart Care Books Bundle" />
+        </div>
+        <div class="value-badge-float">
+          <div class="vbf-icon">🏆</div>
+          <div>
+            <div class="vbf-num">4-Book</div>
+            <div class="vbf-label">Complete Master Series</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Books Cards -->
+  <section class="books-section" style="padding-top: 2rem;">
+    <div class="books-section-header">
+      <div class="section-label reveal">Individual Volumes</div>
+      <h2 class="section-title reveal reveal-d1">Four Books. One Journey.</h2>
+      <p class="section-subtitle reveal reveal-d2">Each volume builds on the last — forming a complete, progressive system for total mental and strategic transformation.</p>
+    </div>
+
+    <div class="books-carousel">
+      <!-- Book I -->
+      <div class="book-card reveal" onclick="openBookModal('The Undefeated Thinking — Edition I', 'assets/book_teal.png', 'Foundational Mindset & Resilience', 'Master mental resilience and foundational clarity. Discover the timeless principles of undefeated thinking crafted for leaders, visionaries, and high performers seeking uncompromising self-mastery and a life of purposeful excellence.')">
+        <div class="book-cover-wrap">
+          <div class="book-badge">Book I</div>
+          <img src="assets/book_teal.png" alt="Book I - Teal">
+        </div>
+        <div class="book-info">
+          <div class="book-edition">Edition I · Teal</div>
+          <div class="book-title">Mindset &amp; Resilience</div>
+          <div class="book-desc">The foundational volume. Build an unbreakable mental architecture and discover the core principles behind true high performance.</div>
+          <div class="book-footer">
+            <div class="book-price">$99</div>
+            <div class="book-preview-btn">Preview →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book II -->
+      <div class="book-card reveal reveal-d1" onclick="openBookModal('The Undefeated Thinking — Edition II', 'assets/book_red.png', 'Overcoming Adversity & Emotional Alchemy', 'Overcome emotional friction, self-doubt, and the fear of failure. Turn every obstacle into raw fuel and build unstoppable momentum in your professional and personal pursuits through actionable clarity.')">
+        <div class="book-cover-wrap">
+          <div class="book-badge">Book II</div>
+          <img src="assets/book_red.png" alt="Book II - Red">
+        </div>
+        <div class="book-info">
+          <div class="book-edition">Edition II · Red</div>
+          <div class="book-title">Overcoming Adversity</div>
+          <div class="book-desc">Turn friction into fuel. The second volume tackles fear, setback, and emotional paralysis with practical frameworks for breakthrough.</div>
+          <div class="book-footer">
+            <div class="book-price">$99</div>
+            <div class="book-preview-btn">Preview →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book III -->
+      <div class="book-card reveal reveal-d2" onclick="openBookModal('The Undefeated Thinking — Edition III', 'assets/book_blue.png', 'Strategic Execution & Deep Focus', 'Strategic clarity and hyper-focused discipline. Cultivate iron-willed execution and laser-sharp focus under high-pressure personal and professional environments through proven systems of performance.')">
+        <div class="book-cover-wrap">
+          <div class="book-badge">Book III</div>
+          <img src="assets/book_blue.png" alt="Book III - Blue">
+        </div>
+        <div class="book-info">
+          <div class="book-edition">Edition III · Blue</div>
+          <div class="book-title">Strategic Execution</div>
+          <div class="book-desc">Laser precision meets iron discipline. Volume three arms you with elite execution strategies used by the world's top performers.</div>
+          <div class="book-footer">
+            <div class="book-price">$99</div>
+            <div class="book-preview-btn">Preview →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book IV -->
+      <div class="book-card reveal reveal-d3" onclick="openBookModal('The Undefeated Thinking — Edition IV', 'assets/book_dark.png', 'Legacy, Mastery & Long-Term Triumph', 'Mastery, legacy, and long-term triumph. The capstone guide to developing an enduring mindset that never yields to adversity — and creates generational impact and irreversible forward momentum.')">
+        <div class="book-cover-wrap">
+          <div class="book-badge">Book IV</div>
+          <img src="assets/book_dark.png" alt="Book IV - Dark">
+        </div>
+        <div class="book-info">
+          <div class="book-edition">Edition IV · Charcoal</div>
+          <div class="book-title">Legacy &amp; Triumph</div>
+          <div class="book-desc">The capstone volume. Craft an enduring legacy and develop the long-view thinking required to sustain elite performance indefinitely.</div>
+          <div class="book-footer">
+            <div class="book-price">$99</div>
+            <div class="book-preview-btn">Preview →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bundle CTA -->
+    <div class="books-bundle-cta" style="margin-top: 3.5rem;">
+      <div class="bundle-cta-box reveal">
+        <div class="section-label" style="margin-bottom:0;">Best Value</div>
+        <h3 style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--ink);">Get the Complete Bundle</h3>
+        <div class="bundle-price-row">
+          <div class="bundle-price">$350</div>
+          <div class="bundle-price-old">$799</div>
+          <div class="bundle-save">SAVE 56%</div>
+        </div>
+        <div class="bundle-features">
+          <div class="bf-item">All 4 premium books</div>
+          <div class="bf-item">Instant PDF delivery</div>
+          <div class="bf-item">3-day money-back guarantee</div>
+          <div class="bf-item">Lifetime access</div>
+        </div>
+        <button class="btn btn-gold btn-lg" style="margin-top:0.5rem;" onclick="openCheckoutModal()">Buy Bundle Now — $350</button>
+      </div>
+    </div>
+  </section>
+'''
+
+# ==========================================
+# 2. WHY US PAGE (why-us.html)
+# ==========================================
+why_body = '''
+  <header class="page-header">
+    <div class="section-label reveal">Why Smart Care</div>
+    <h1 class="page-title reveal reveal-d1">Built Different. Priced Fairly.</h1>
+    <p class="page-subtitle reveal reveal-d2">We don't do fluff. Every page is purposeful, every principle is actionable, and every purchase is fully backed by our ironclad satisfaction guarantee.</p>
+  </header>
+
+  <section class="why-section" style="padding-top: 1rem;">
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">Instant Delivery</div>
+        <div class="why-desc">Forget waiting. Your download link appears on the confirmation page the second your payment clears — and hits your email within minutes.</div>
+      </div>
+      <div class="why-card reveal reveal-d1">
+        <div class="why-icon">🛡️</div>
+        <div class="why-title">3-Day Refund Guarantee</div>
+        <div class="why-desc">Didn't love it? Email us within 3 days for a full, no-questions refund. We stand behind every word of these books completely.</div>
+      </div>
+      <div class="why-card reveal reveal-d2">
+        <div class="why-icon">📱</div>
+        <div class="why-title">Read Anywhere</div>
+        <div class="why-desc">PDF format is compatible with every device — iPhone, Android, Kindle, Mac, Windows. No special software or subscriptions required.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">🎯</div>
+        <div class="why-title">Actionable, Not Academic</div>
+        <div class="why-desc">Written for real-world execution. Every concept comes with a practical framework you can apply the same day you read it.</div>
+      </div>
+      <div class="why-card reveal reveal-d1">
+        <div class="why-icon">🔒</div>
+        <div class="why-title">Secure & Private</div>
+        <div class="why-desc">Your payment is processed with 256-bit SSL encryption. We never see or store your card details — ever.</div>
+      </div>
+      <div class="why-card reveal reveal-d2">
+        <div class="why-icon">📩</div>
+        <div class="why-title">Real Human Support</div>
+        <div class="why-desc">Our support desk at support@smartcarevt.com is staffed Monday through Saturday and replies within 2 business days.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta-section" style="margin-top: 3rem;">
+    <div class="final-cta-box reveal">
+      <div class="section-label">Take Action</div>
+      <h2 class="section-title">Experience the Smart Care Standard</h2>
+      <p class="section-subtitle">Join ambitious readers worldwide who have unlocked their highest standard of performance through our books.</p>
+      <button class="btn btn-gold btn-lg" onclick="openCheckoutModal()">Get All 4 Books — $350</button>
+      <div class="cta-guarantee">
+        <div class="cg-item"><span>✓</span> Instant PDF Delivery</div>
+        <div class="cg-item"><span>✓</span> 3-Day Refund Guarantee</div>
+        <div class="cg-item"><span>✓</span> Lifetime Access</div>
+      </div>
+    </div>
+  </section>
+'''
+
+# ==========================================
+# 3. REVIEWS PAGE (reviews.html)
+# ==========================================
+reviews_body = '''
+  <header class="page-header">
+    <div class="section-label reveal">Verified Reader Feedback</div>
+    <h1 class="page-title reveal reveal-d1">What Readers Are Saying</h1>
+    <p class="page-subtitle reveal reveal-d2">Real feedback and verified reviews from ambitious readers across Pakistan, the USA, Canada, and the United Arab Emirates.</p>
+  </header>
+
+  <!-- Stats Bar -->
+  <section class="container" style="margin-bottom: 2rem;">
+    <div class="stats-grid reveal" style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.2rem; text-align: center;">
+      <div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--gold); margin-bottom: 0.3rem;">4.9 / 5</div>
+        <div style="font-size: 0.88rem; color: var(--ink-3); font-weight: 600;">Average Reader Rating</div>
+      </div>
+      <div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 0.3rem;">1,200+</div>
+        <div style="font-size: 0.88rem; color: var(--ink-3); font-weight: 600;">Digital Copies Sold</div>
+      </div>
+      <div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 0.3rem;">4 Volumes</div>
+        <div style="font-size: 0.88rem; color: var(--ink-3); font-weight: 600;">Complete Framework</div>
+      </div>
+      <div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--gold); margin-bottom: 0.3rem;">100%</div>
+        <div style="font-size: 0.88rem; color: var(--ink-3); font-weight: 600;">Satisfaction Guaranteed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Grid -->
+  <section class="testimonials-section" style="padding-top: 1rem;">
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"I purchased the bundle and consumed all four books in a week. Edition I alone rewired how I approach challenge. These aren't just motivational reads — they're operational manuals."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">A</div>
+          <div>
+            <div class="tc-name">Ahmed K.</div>
+            <div class="tc-role">Entrepreneur, Dubai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d1">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"Edition III on strategic execution completely changed how I plan my work week. The chapter on deep-focus systems alone was worth 10x the purchase price. Instant delivery too — impressive."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">S</div>
+          <div>
+            <div class="tc-name">Sarah M.</div>
+            <div class="tc-role">Marketing Director, Toronto</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"Bought just Book II first, then immediately came back for the full bundle. The writing is dense with value, not filler. Smart Care clearly knows what serious readers want."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">Z</div>
+          <div>
+            <div class="tc-name">Zara F.</div>
+            <div class="tc-role">Product Lead, Karachi</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"Edition IV on legacy is genuinely one of the most thoughtful long-form reads I've encountered on the topic of lasting success. It doesn't promise shortcuts — it delivers truth."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">R</div>
+          <div>
+            <div class="tc-name">Raza H.</div>
+            <div class="tc-role">Startup Founder, Islamabad</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d1">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"Customer support replied within a day when I had an issue with my download link. They resolved it immediately and even threw in a personal note. Rare professionalism in this space."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">L</div>
+          <div>
+            <div class="tc-name">Lena D.</div>
+            <div class="tc-role">Coach &amp; Speaker, Houston</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-text">"The bundle price is a steal. I've paid more for single books that delivered a fraction of the value. The 3-day refund policy made me trust them immediately — and I didn't need it."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">O</div>
+          <div>
+            <div class="tc-name">Omar N.</div>
+            <div class="tc-role">Finance Manager, Calgary</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta-section" style="margin-top: 3rem;">
+    <div class="final-cta-box reveal">
+      <div class="section-label">Start Today</div>
+      <h2 class="section-title">Join Over 1,200 Empowered Readers</h2>
+      <p class="section-subtitle">Unlock immediate access to all four volumes in PDF format — delivered straight to your inbox.</p>
+      <button class="btn btn-gold btn-lg" onclick="openCheckoutModal()">Get All 4 Books — $350</button>
+      <div class="cta-guarantee">
+        <div class="cg-item"><span>✓</span> Instant PDF Delivery</div>
+        <div class="cg-item"><span>✓</span> 3-Day Refund Guarantee</div>
+        <div class="cg-item"><span>✓</span> Lifetime Access</div>
+      </div>
+    </div>
+  </section>
+'''
+
+# ==========================================
+# 4. FAQ PAGE (faq.html)
+# ==========================================
+faq_body = '''
+  <header class="page-header">
+    <div class="section-label reveal">Support & Help</div>
+    <h1 class="page-title reveal reveal-d1">Frequently Asked Questions</h1>
+    <p class="page-subtitle reveal reveal-d2">Everything you need to know about purchasing, delivery, file formats, and our refund guarantee.</p>
+  </header>
+
+  <section class="faq-section" style="padding-top: 1rem;">
+    <div class="faq-wrap">
+      <div class="faq-item open reveal" onclick="toggleFAQ(this)">
+        <button class="faq-q">What format are the books delivered in? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">All four e-books are delivered as PDF files — the most universally compatible digital format. You can read them on any smartphone (iOS or Android), tablet, Kindle, MacBook, or Windows PC using free PDF readers like Adobe Acrobat Reader or the reader built into your browser.</div>
+      </div>
+      <div class="faq-item reveal reveal-d1" onclick="toggleFAQ(this)">
+        <button class="faq-q">How quickly will I receive the books after purchasing? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">Instantly. The moment your payment is confirmed, a secure download link appears on your order confirmation page. We also send the same link to your email address within a few minutes. If you don't see the email, please check your spam or junk folder.</div>
+      </div>
+      <div class="faq-item reveal reveal-d2" onclick="toggleFAQ(this)">
+        <button class="faq-q">What is your refund policy? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">We offer a full 3-Day (72-hour) Money-Back Guarantee. If you're not satisfied for any reason, email support@smartcarevt.com within 3 days of your purchase with your order number and we will process a full refund to your original payment method within 3–5 business days. No complicated forms, no runaround.</div>
+      </div>
+      <div class="faq-item reveal" onclick="toggleFAQ(this)">
+        <button class="faq-q">Can I buy individual books instead of the full bundle? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">Yes! Each book is available individually for $99. However, the complete bundle of all four books is priced at $350. The bundle is by far our most popular option and the best way to experience the complete Undefeated Thinking system.</div>
+      </div>
+      <div class="faq-item reveal reveal-d1" onclick="toggleFAQ(this)">
+        <button class="faq-q">Is my payment information secure? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">Absolutely. All payments are processed through certified third-party payment processors using 256-bit SSL encryption — the same standard used by banks. We never see, collect, or store your full card number, CVV, or banking credentials.</div>
+      </div>
+      <div class="faq-item reveal reveal-d2" onclick="toggleFAQ(this)">
+        <button class="faq-q">How do I contact support if I have an issue? <span class="faq-chevron">▼</span></button>
+        <div class="faq-a">Email us at support@smartcarevt.com — our support desk is open Monday to Saturday and we typically respond within 2 business days. For urgent download or technical issues, reference your order number and we will prioritise your case.</div>
+      </div>
+    </div>
+
+    <div class="container" style="max-width:760px; margin: 3rem auto 0;">
+      <div class="support-callout">
+        <span class="support-callout-icon">💬</span>
+        <div>Have a question that isn't answered here? Reach out to our dedicated support team at <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a> or visit our <a href="contact.html">Contact page</a>.</div>
+      </div>
+    </div>
+  </section>
+'''
+
+# ==========================================
+# 5. CONTACT PAGE (contact.html)
+# ==========================================
+contact_body = '''
+  <header class="page-header">
+    <div class="section-label reveal">Support Center</div>
+    <h1 class="page-title reveal reveal-d1">Contact Us</h1>
+    <p class="page-subtitle reveal reveal-d2">Have questions about an order, payment, or downloading your e-books? Our team is here to assist you Monday through Saturday.</p>
+  </header>
+
+  <main class="page-content-wrapper">
+    <!-- Contact Info Cards -->
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+      <div class="why-card reveal" style="padding: 2rem; text-align: left;">
+        <div class="why-icon" style="margin: 0 0 1rem 0;">📩</div>
+        <div class="why-title" style="font-size: 1.1rem;">Email Us</div>
+        <div class="why-desc" style="font-size: 0.95rem;">
+          <a href="mailto:support@smartcarevt.com" style="color:var(--ink); font-weight:700;">support@smartcarevt.com</a>
+        </div>
+      </div>
+
+      <div class="why-card reveal reveal-d1" style="padding: 2rem; text-align: left;">
+        <div class="why-icon" style="margin: 0 0 1rem 0;">⏰</div>
+        <div class="why-title" style="font-size: 1.1rem;">Response Time</div>
+        <div class="why-desc" style="font-size: 0.95rem;">
+          Monday – Saturday<br/>Replies within <strong>2 business days</strong>
+        </div>
+      </div>
+
+      <div class="why-card reveal reveal-d2" style="padding: 2rem; text-align: left;">
+        <div class="why-icon" style="margin: 0 0 1rem 0;">🏢</div>
+        <div class="why-title" style="font-size: 1.1rem;">Address</div>
+        <div class="why-desc" style="font-size: 0.95rem;">
+          Smart Care Tower, Blue Area<br/>Islamabad, Pakistan
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form Card -->
+    <div class="policy-card reveal" id="contactFormCard">
+      <h3 style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--ink);">Send a Message</h3>
+      <p style="color: var(--ink-3); font-size: 0.95rem; margin-bottom: 2rem;">Fill out the form below and we will get back to your email directly.</p>
+      
+      <form action="https://formsubmit.co/support@smartcarevt.com" method="POST" onsubmit="handleContactSubmit(event)">
+        <input type="hidden" name="_subject" value="New Contact Inquiry — Smart Care VT">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input class="form-input" type="text" name="name" required placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" name="email" required placeholder="john@example.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input class="form-input" type="text" name="subject" required placeholder="Order inquiry, Download issue, Refund request…">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-input" name="message" rows="5" required placeholder="Please describe your question or issue in detail…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:0.8rem;">Send Message</button>
+      </form>
+    </div>
+  </main>
+'''
+
+# ==========================================
+# 6. POLICY PAGES BUILDER
+# ==========================================
+def build_policy_page(key_title, subtitle, page_label="Legal & Policies"):
+    policy_html = policies.get(key_title, "")
+    body = f'''
+  <header class="page-header">
+    <div class="section-label reveal">{page_label}</div>
+    <h1 class="page-title reveal reveal-d1">{key_title}</h1>
+    <p class="page-subtitle reveal reveal-d2">{subtitle}</p>
+  </header>
+
+  <main class="page-content-wrapper">
+    <div class="policy-card reveal">
+      <div class="policy-content-area">
+        {policy_html}
+      </div>
+      <div class="support-callout" style="margin-top: 2.5rem;">
+        <span class="support-callout-icon">📩</span>
+        <div>Have questions about this policy? Contact our support team at <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a> — we respond within 2 business days.</div>
+      </div>
+    </div>
+  </main>
+'''
+    return body
+
+# Write all pages
+pages_to_write = [
+    {
+        'filename': 'books.html',
+        'title': 'Books Collection',
+        'desc': 'Discover The Undefeated Thinking 4-book series by Smart Care. Instant PDF delivery, $99 each or $350 bundle.',
+        'active': 'books',
+        'body': books_body,
+        'aliases': []
+    },
+    {
+        'filename': 'why-us.html',
+        'title': 'Why Smart Care',
+        'desc': 'Why choose Smart Care E-Books. Instant delivery, 3-day money back guarantee, and real-world execution frameworks.',
+        'active': 'why',
+        'body': why_body,
+        'aliases': ['why.html']
+    },
+    {
+        'filename': 'reviews.html',
+        'title': 'Reader Reviews',
+        'desc': 'Read verified reviews and testimonials from readers worldwide for The Undefeated Thinking books.',
+        'active': 'reviews',
+        'body': reviews_body,
+        'aliases': ['testimonials.html']
+    },
+    {
+        'filename': 'faq.html',
+        'title': 'Frequently Asked Questions',
+        'desc': 'Common questions about purchasing, reading, and downloading Smart Care digital e-books.',
+        'active': 'faq',
+        'body': faq_body,
+        'aliases': []
+    },
+    {
+        'filename': 'contact.html',
+        'title': 'Contact Us',
+        'desc': 'Get in touch with the Smart Care team for assistance with downloads, orders, or inquiries.',
+        'active': '',
+        'body': contact_body,
+        'aliases': []
+    },
+    {
+        'filename': 'terms-of-service.html',
+        'title': 'Terms of Service',
+        'desc': 'Terms of Service governing your access and purchase of Smart Care digital e-books.',
+        'active': '',
+        'body': build_policy_page('Terms of Service', 'Please review the terms and conditions that govern your use of our website and purchase of digital products.'),
+        'aliases': ['terms.html']
+    },
+    {
+        'filename': 'refund-policy.html',
+        'title': 'Refund Policy',
+        'desc': 'Smart Care E-Books 3-Day Money-Back Guarantee and complete refund policy conditions.',
+        'active': '',
+        'body': build_policy_page('Refund Policy', 'Our 3-Day (72-hour) Money-Back Guarantee details, eligibility, and step-by-step refund process.'),
+        'aliases': ['refunds.html']
+    },
+    {
+        'filename': 'delivery-policy.html',
+        'title': 'Delivery Policy',
+        'desc': 'Information on instant digital PDF delivery and link confirmation for Smart Care e-books.',
+        'active': '',
+        'body': build_policy_page('Delivery Policy', 'Digital delivery guidelines, file formats, instant download links, and access information.'),
+        'aliases': ['delivery.html']
+    },
+    {
+        'filename': 'privacy-policy.html',
+        'title': 'Privacy Policy',
+        'desc': 'How Smart Care collects, protects, and handles your personal information when using our store.',
+        'active': '',
+        'body': build_policy_page('Privacy Policy', 'Our commitment to protecting your privacy, data security, and rights under applicable privacy laws.'),
+        'aliases': ['privacy.html']
+    },
+    {
+        'filename': 'disclaimer.html',
+        'title': 'Disclaimer',
+        'desc': 'Educational and informational disclaimer for Smart Care E-Books publications.',
+        'active': '',
+        'body': build_policy_page('Disclaimer', 'Important disclosures regarding the educational and informational nature of our publications.'),
+        'aliases': []
+    }
+]
+
+for p in pages_to_write:
+    html = get_base_html(p['title'], p['desc'], p['active'], p['body'])
+    with open(p['filename'], 'w', encoding='utf-8') as f:
+        f.write(html)
+    print(f"Created: {p['filename']}")
+    for alias in p['aliases']:
+        with open(alias, 'w', encoding='utf-8') as f:
+            f.write(html)
+        print(f"Created alias: {alias}")
+
+print("All separate pages created successfully!")
