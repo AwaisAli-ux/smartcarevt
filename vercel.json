@@ -1,0 +1,22 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/books", "destination": "/books.html" },
+    { "source": "/why-us", "destination": "/why-us.html" },
+    { "source": "/why", "destination": "/why-us.html" },
+    { "source": "/reviews", "destination": "/reviews.html" },
+    { "source": "/testimonials", "destination": "/reviews.html" },
+    { "source": "/faq", "destination": "/faq.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/terms-of-service", "destination": "/terms-of-service.html" },
+    { "source": "/terms", "destination": "/terms-of-service.html" },
+    { "source": "/refund-policy", "destination": "/refund-policy.html" },
+    { "source": "/refunds", "destination": "/refund-policy.html" },
+    { "source": "/delivery-policy", "destination": "/delivery-policy.html" },
+    { "source": "/delivery", "destination": "/delivery-policy.html" },
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/privacy", "destination": "/privacy-policy.html" },
+    { "source": "/disclaimer", "destination": "/disclaimer.html" }
+  ]
+}

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="/">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Discover The Undefeated Thinking 4-book series by Smart Care. Instant PDF delivery, $99 each or $350 bundle." />
@@ -20,20 +21,20 @@
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
     <div class="navbar-inner">
-      <a href="index.html" class="nav-logo">
+      <a href="/" class="nav-logo">
         <img src="assets/logo_transparent.png" alt="Smart Care" />
       </a>
 
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="books.html" style="color:var(--gold); font-weight:700;">Books</a>
-        <a href="why-us.html" >Why Us</a>
-        <a href="reviews.html" >Reviews</a>
-        <a href="faq.html" >FAQ</a>
+        <a href="/">Home</a>
+        <a href="/books" style="color:var(--gold); font-weight:700;">Books</a>
+        <a href="/why-us" >Why Us</a>
+        <a href="/reviews" >Reviews</a>
+        <a href="/faq" >FAQ</a>
       </div>
 
       <div class="nav-cta">
-        <a href="contact.html" class="btn btn-outline btn-sm">Contact</a>
+        <a href="/contact" class="btn btn-outline btn-sm">Contact</a>
         <button class="btn btn-primary btn-sm" onclick="openCheckoutModal()">Buy Now</button>
       </div>
 
@@ -45,12 +46,12 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" onclick="toggleMenu()">Home</a>
-    <a href="books.html" onclick="toggleMenu()">Books</a>
-    <a href="why-us.html" onclick="toggleMenu()">Why Us</a>
-    <a href="reviews.html" onclick="toggleMenu()">Reviews</a>
-    <a href="faq.html" onclick="toggleMenu()">FAQ</a>
-    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+    <a href="/" onclick="toggleMenu()">Home</a>
+    <a href="/books" onclick="toggleMenu()">Books</a>
+    <a href="/why-us" onclick="toggleMenu()">Why Us</a>
+    <a href="/reviews" onclick="toggleMenu()">Reviews</a>
+    <a href="/faq" onclick="toggleMenu()">FAQ</a>
+    <a href="/contact" onclick="toggleMenu()">Contact</a>
     <button class="btn btn-primary btn-block" onclick="openCheckoutModal(); toggleMenu();">Buy Bundle — $350</button>
   </div>
 
@@ -218,7 +219,7 @@
     <div class="footer-grid">
       <!-- Brand -->
       <div class="footer-brand">
-        <a href="index.html"><img src="assets/logo_footer.png" alt="Smart Care" /></a>
+        <a href="/"><img src="assets/logo_footer.png" alt="Smart Care" /></a>
         <div class="footer-brand-desc">
           Smart Care E Books is a premium digital publishing brand. We create high-impact educational e-books for ambitious individuals worldwide.
         </div>
@@ -244,11 +245,11 @@
       <div>
         <div class="footer-heading">Policies</div>
         <div class="footer-links">
-          <a href="terms-of-service.html">Terms of Service</a>
-          <a href="refund-policy.html">Refund Policy</a>
-          <a href="delivery-policy.html">Delivery Policy</a>
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="disclaimer.html">Disclaimer</a>
+          <a href="/terms-of-service">Terms of Service</a>
+          <a href="/refund-policy">Refund Policy</a>
+          <a href="/delivery-policy">Delivery Policy</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/disclaimer">Disclaimer</a>
         </div>
       </div>
 
@@ -256,9 +257,9 @@
       <div>
         <div class="footer-heading">Support</div>
         <div class="footer-links">
-          <a href="contact.html">Contact Us</a>
-          <a href="faq.html">FAQ</a>
-          <a href="refund-policy.html">Request Refund</a>
+          <a href="/contact">Contact Us</a>
+          <a href="/faq">FAQ</a>
+          <a href="/refund-policy">Request Refund</a>
           <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a>
         </div>
         <div style="margin-top: 1.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.6;">
@@ -272,9 +273,9 @@
         &copy; 2026 Smart Care E Books
       </div>
       <div style="display: flex; gap: 1.5rem;">
-        <a href="privacy-policy.html">Privacy</a>
-        <a href="terms-of-service.html">Terms</a>
-        <a href="disclaimer.html">Disclaimer</a>
+        <a href="/privacy-policy">Privacy</a>
+        <a href="/terms-of-service">Terms</a>
+        <a href="/disclaimer">Disclaimer</a>
       </div>
     </div>
   </footer>
@@ -497,7 +498,7 @@
           <p style="color: var(--ink-3); font-size:1.05rem; line-height:1.75; margin-bottom:2rem; max-width:420px; margin-left:auto; margin-right:auto;">
             Your inquiry has been received. Our team at <strong>${SUPPORT_EMAIL}</strong> will respond within 2 business days.
           </p>
-          <a href="index.html" class="btn btn-outline">Back to Home</a>
+          <a href="/" class="btn btn-outline">Back to Home</a>
         </div>
       `;
       showToast('Message sent to support@smartcarevt.com');

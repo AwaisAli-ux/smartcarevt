@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 
 # Load policies
 with open('policies_data.js', 'r', encoding='utf-8') as f:
@@ -22,6 +23,7 @@ def get_base_html(title, desc, active_nav, body_content, extra_head=""):
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="/">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="{desc}" />
@@ -41,20 +43,20 @@ def get_base_html(title, desc, active_nav, body_content, extra_head=""):
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
     <div class="navbar-inner">
-      <a href="index.html" class="nav-logo">
+      <a href="/" class="nav-logo">
         <img src="assets/logo_transparent.png" alt="Smart Care" />
       </a>
 
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="books.html" {active_books}>Books</a>
-        <a href="why-us.html" {active_why}>Why Us</a>
-        <a href="reviews.html" {active_reviews}>Reviews</a>
-        <a href="faq.html" {active_faq}>FAQ</a>
+        <a href="/">Home</a>
+        <a href="/books" {active_books}>Books</a>
+        <a href="/why-us" {active_why}>Why Us</a>
+        <a href="/reviews" {active_reviews}>Reviews</a>
+        <a href="/faq" {active_faq}>FAQ</a>
       </div>
 
       <div class="nav-cta">
-        <a href="contact.html" class="btn btn-outline btn-sm">Contact</a>
+        <a href="/contact" class="btn btn-outline btn-sm">Contact</a>
         <button class="btn btn-primary btn-sm" onclick="openCheckoutModal()">Buy Now</button>
       </div>
 
@@ -66,12 +68,12 @@ def get_base_html(title, desc, active_nav, body_content, extra_head=""):
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" onclick="toggleMenu()">Home</a>
-    <a href="books.html" onclick="toggleMenu()">Books</a>
-    <a href="why-us.html" onclick="toggleMenu()">Why Us</a>
-    <a href="reviews.html" onclick="toggleMenu()">Reviews</a>
-    <a href="faq.html" onclick="toggleMenu()">FAQ</a>
-    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+    <a href="/" onclick="toggleMenu()">Home</a>
+    <a href="/books" onclick="toggleMenu()">Books</a>
+    <a href="/why-us" onclick="toggleMenu()">Why Us</a>
+    <a href="/reviews" onclick="toggleMenu()">Reviews</a>
+    <a href="/faq" onclick="toggleMenu()">FAQ</a>
+    <a href="/contact" onclick="toggleMenu()">Contact</a>
     <button class="btn btn-primary btn-block" onclick="openCheckoutModal(); toggleMenu();">Buy Bundle — $350</button>
   </div>
 
@@ -82,7 +84,7 @@ def get_base_html(title, desc, active_nav, body_content, extra_head=""):
     <div class="footer-grid">
       <!-- Brand -->
       <div class="footer-brand">
-        <a href="index.html"><img src="assets/logo_footer.png" alt="Smart Care" /></a>
+        <a href="/"><img src="assets/logo_footer.png" alt="Smart Care" /></a>
         <div class="footer-brand-desc">
           Smart Care E Books is a premium digital publishing brand. We create high-impact educational e-books for ambitious individuals worldwide.
         </div>
@@ -108,11 +110,11 @@ def get_base_html(title, desc, active_nav, body_content, extra_head=""):
       <div>
         <div class="footer-heading">Policies</div>
         <div class="footer-links">
-          <a href="terms-of-service.html">Terms of Service</a>
-          <a href="refund-policy.html">Refund Policy</a>
-          <a href="delivery-policy.html">Delivery Policy</a>
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="disclaimer.html">Disclaimer</a>
+          <a href="/terms-of-service">Terms of Service</a>
+          <a href="/refund-policy">Refund Policy</a>
+          <a href="/delivery-policy">Delivery Policy</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/disclaimer">Disclaimer</a>
         </div>
       </div>
 
@@ -120,9 +122,9 @@ def get_base_html(title, desc, active_nav, body_content, extra_head=""):
       <div>
         <div class="footer-heading">Support</div>
         <div class="footer-links">
-          <a href="contact.html">Contact Us</a>
-          <a href="faq.html">FAQ</a>
-          <a href="refund-policy.html">Request Refund</a>
+          <a href="/contact">Contact Us</a>
+          <a href="/faq">FAQ</a>
+          <a href="/refund-policy">Request Refund</a>
           <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a>
         </div>
         <div style="margin-top: 1.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.6;">
@@ -136,9 +138,9 @@ def get_base_html(title, desc, active_nav, body_content, extra_head=""):
         &copy; 2026 Smart Care E Books
       </div>
       <div style="display: flex; gap: 1.5rem;">
-        <a href="privacy-policy.html">Privacy</a>
-        <a href="terms-of-service.html">Terms</a>
-        <a href="disclaimer.html">Disclaimer</a>
+        <a href="/privacy-policy">Privacy</a>
+        <a href="/terms-of-service">Terms</a>
+        <a href="/disclaimer">Disclaimer</a>
       </div>
     </div>
   </footer>
@@ -361,7 +363,7 @@ def get_base_html(title, desc, active_nav, body_content, extra_head=""):
           <p style="color: var(--ink-3); font-size:1.05rem; line-height:1.75; margin-bottom:2rem; max-width:420px; margin-left:auto; margin-right:auto;">
             Your inquiry has been received. Our team at <strong>${{SUPPORT_EMAIL}}</strong> will respond within 2 business days.
           </p>
-          <a href="index.html" class="btn btn-outline">Back to Home</a>
+          <a href="/" class="btn btn-outline">Back to Home</a>
         </div>
       `;
       showToast('Message sent to support@smartcarevt.com');
@@ -371,7 +373,7 @@ def get_base_html(title, desc, active_nav, body_content, extra_head=""):
 </html>'''
 
 # ==========================================
-# 1. BOOKS PAGE (books.html)
+# 1. BOOKS PAGE
 # ==========================================
 books_body = '''
   <header class="page-header">
@@ -533,7 +535,7 @@ books_body = '''
 '''
 
 # ==========================================
-# 2. WHY US PAGE (why-us.html)
+# 2. WHY US PAGE
 # ==========================================
 why_body = '''
   <header class="page-header">
@@ -594,7 +596,7 @@ why_body = '''
 '''
 
 # ==========================================
-# 3. REVIEWS PAGE (reviews.html)
+# 3. REVIEWS PAGE
 # ==========================================
 reviews_body = '''
   <header class="page-header">
@@ -719,7 +721,7 @@ reviews_body = '''
 '''
 
 # ==========================================
-# 4. FAQ PAGE (faq.html)
+# 4. FAQ PAGE
 # ==========================================
 faq_body = '''
   <header class="page-header">
@@ -759,14 +761,14 @@ faq_body = '''
     <div class="container" style="max-width:760px; margin: 3rem auto 0;">
       <div class="support-callout">
         <span class="support-callout-icon">💬</span>
-        <div>Have a question that isn't answered here? Reach out to our dedicated support team at <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a> or visit our <a href="contact.html">Contact page</a>.</div>
+        <div>Have a question that isn't answered here? Reach out to our dedicated support team at <a href="mailto:support@smartcarevt.com">support@smartcarevt.com</a> or visit our <a href="/contact">Contact page</a>.</div>
       </div>
     </div>
   </section>
 '''
 
 # ==========================================
-# 5. CONTACT PAGE (contact.html)
+# 5. CONTACT PAGE
 # ==========================================
 contact_body = '''
   <header class="page-header">
@@ -862,9 +864,10 @@ def build_policy_page(key_title, subtitle, page_label="Legal & Policies"):
 '''
     return body
 
-# Write all pages
+# Pages definitions
 pages_to_write = [
     {
+        'slug': 'books',
         'filename': 'books.html',
         'title': 'Books Collection',
         'desc': 'Discover The Undefeated Thinking 4-book series by Smart Care. Instant PDF delivery, $99 each or $350 bundle.',
@@ -873,22 +876,25 @@ pages_to_write = [
         'aliases': []
     },
     {
+        'slug': 'why-us',
         'filename': 'why-us.html',
         'title': 'Why Smart Care',
         'desc': 'Why choose Smart Care E-Books. Instant delivery, 3-day money back guarantee, and real-world execution frameworks.',
         'active': 'why',
         'body': why_body,
-        'aliases': ['why.html']
+        'aliases': ['why.html', 'why']
     },
     {
+        'slug': 'reviews',
         'filename': 'reviews.html',
         'title': 'Reader Reviews',
         'desc': 'Read verified reviews and testimonials from readers worldwide for The Undefeated Thinking books.',
         'active': 'reviews',
         'body': reviews_body,
-        'aliases': ['testimonials.html']
+        'aliases': ['testimonials.html', 'testimonials']
     },
     {
+        'slug': 'faq',
         'filename': 'faq.html',
         'title': 'Frequently Asked Questions',
         'desc': 'Common questions about purchasing, reading, and downloading Smart Care digital e-books.',
@@ -897,6 +903,7 @@ pages_to_write = [
         'aliases': []
     },
     {
+        'slug': 'contact',
         'filename': 'contact.html',
         'title': 'Contact Us',
         'desc': 'Get in touch with the Smart Care team for assistance with downloads, orders, or inquiries.',
@@ -905,38 +912,43 @@ pages_to_write = [
         'aliases': []
     },
     {
+        'slug': 'terms-of-service',
         'filename': 'terms-of-service.html',
         'title': 'Terms of Service',
         'desc': 'Terms of Service governing your access and purchase of Smart Care digital e-books.',
         'active': '',
         'body': build_policy_page('Terms of Service', 'Please review the terms and conditions that govern your use of our website and purchase of digital products.'),
-        'aliases': ['terms.html']
+        'aliases': ['terms.html', 'terms']
     },
     {
+        'slug': 'refund-policy',
         'filename': 'refund-policy.html',
         'title': 'Refund Policy',
         'desc': 'Smart Care E-Books 3-Day Money-Back Guarantee and complete refund policy conditions.',
         'active': '',
         'body': build_policy_page('Refund Policy', 'Our 3-Day (72-hour) Money-Back Guarantee details, eligibility, and step-by-step refund process.'),
-        'aliases': ['refunds.html']
+        'aliases': ['refunds.html', 'refunds']
     },
     {
+        'slug': 'delivery-policy',
         'filename': 'delivery-policy.html',
         'title': 'Delivery Policy',
         'desc': 'Information on instant digital PDF delivery and link confirmation for Smart Care e-books.',
         'active': '',
         'body': build_policy_page('Delivery Policy', 'Digital delivery guidelines, file formats, instant download links, and access information.'),
-        'aliases': ['delivery.html']
+        'aliases': ['delivery.html', 'delivery']
     },
     {
+        'slug': 'privacy-policy',
         'filename': 'privacy-policy.html',
         'title': 'Privacy Policy',
         'desc': 'How Smart Care collects, protects, and handles your personal information when using our store.',
         'active': '',
         'body': build_policy_page('Privacy Policy', 'Our commitment to protecting your privacy, data security, and rights under applicable privacy laws.'),
-        'aliases': ['privacy.html']
+        'aliases': ['privacy.html', 'privacy']
     },
     {
+        'slug': 'disclaimer',
         'filename': 'disclaimer.html',
         'title': 'Disclaimer',
         'desc': 'Educational and informational disclaimer for Smart Care E-Books publications.',
@@ -948,12 +960,28 @@ pages_to_write = [
 
 for p in pages_to_write:
     html = get_base_html(p['title'], p['desc'], p['active'], p['body'])
+    # 1. Write flat root html file (e.g. books.html)
     with open(p['filename'], 'w', encoding='utf-8') as f:
         f.write(html)
-    print(f"Created: {p['filename']}")
-    for alias in p['aliases']:
-        with open(alias, 'w', encoding='utf-8') as f:
-            f.write(html)
-        print(f"Created alias: {alias}")
+    print(f"Created file: {p['filename']}")
 
-print("All separate pages created successfully!")
+    # 2. Also write directory/index.html (e.g. books/index.html) so /books works on ANY server!
+    slug_dir = p['slug']
+    os.makedirs(slug_dir, exist_ok=True)
+    with open(os.path.join(slug_dir, 'index.html'), 'w', encoding='utf-8') as f:
+        f.write(html)
+    print(f"Created directory index: {slug_dir}/index.html")
+
+    # 3. Handle aliases
+    for alias in p['aliases']:
+        if alias.endswith('.html'):
+            with open(alias, 'w', encoding='utf-8') as f:
+                f.write(html)
+            print(f"Created alias file: {alias}")
+        else:
+            os.makedirs(alias, exist_ok=True)
+            with open(os.path.join(alias, 'index.html'), 'w', encoding='utf-8') as f:
+                f.write(html)
+            print(f"Created alias directory index: {alias}/index.html")
+
+print("All clean URL pages generated successfully!")
